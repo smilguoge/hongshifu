@@ -1,0 +1,10 @@
+<!--pages/denglu/index.wxml-->
+<view class="depage">
+<view class="bg">
+<image src="../../images/logobg.png"></image>
+</view>
+<view class="inputst">
+<input type="number" placeholder="请输入手机号码" name="phone" maxlength="11" bindblur="inputvalue" />
+</view>
+<view class="re-btn" bindtap="putregist">申请商户代叫</view>
+</view>

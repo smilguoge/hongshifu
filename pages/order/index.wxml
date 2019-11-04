@@ -1,0 +1,22 @@
+<!--pages/order2/index.wxml-->
+<view class="page2">
+<view class="order-inf" wx:for="{{orderinfs}}" wx:key="index" data-indx="{{index}}">
+<view bindtap="goorderinf" data-id="{{item.id}}">
+  <view class="pcont1">
+  <text class="tex6">我的代驾</text>
+  <text class="tex5">{{item.status_name}}</text>
+  </view>
+  <view class="pcont2">
+  <text class="tex1">{{item.order_address}}</text>
+  </view>
+  <view class="pcont3">
+  <text class="tex2">{{item.order_destination_address}}</text>
+  <text class="tex7">{{item.order_at}}</text>
+  </view>
+  </view>
+  <view class="pcont4">
+  <text class="tex3">￥<text class="tex4">{{item.money}}</text></text>
+  <text class="btn1" hidden="{{item.status==60}}" bindtap="goassess" data-id="{{item.id}}">{{string1}}</text>
+  </view>
+</view>
+</view>

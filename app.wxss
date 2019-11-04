@@ -1,0 +1,21 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+.page{
+  line-height: 1.8;
+
+}
+.page2{
+  line-height: 1.8;
+  border-top:.5rpx solid #f2f2f2;
+  border-bottom:.5rpx solid #f2f2f2;
+  background-color: #f2f2f2;
+  font-family: PingFang-SC-Medium;
+}

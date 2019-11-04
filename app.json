@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/assess/index",
+    "pages/travel/index",
+    "pages/my/index",
+    "pages/dispatch/index",
+    "pages/order/index",
+    "pages/denglu/index",
+    "pages/orderinfs/index",
+    "pages/registe/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+   "permission": {
+        "scope.userLocation": {
+          "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+      }
+
+}

@@ -1,0 +1,30 @@
+<!--pages/my/index.wxml-->
+<view class="mypage page">
+  <view class="my-inf1">
+  <image src="../../images/customtopbg.png" class="myimg1"></image>
+    <view class="my-cont1">
+      <view class="my-cont11">
+        <image src="{{customerlogo}}" class="myimg2"></image>
+        <view>
+          <view class="font1">{{name}}</view>
+          <view class="font2">{{tel}}</view>
+        </view>
+      </view>
+      <!-- <text class="psty1" hidden="{{statenum}}">修改</text> -->
+    </view>
+    <view class="my-cont2">
+      <view class="psty2">我的余额<text decode="{{true}}" >&nbsp;</text>{{money}}</view>
+      <view class="psty3">我的积分<text decode="{{true}}" >&nbsp;</text>{{integral}}</view>  
+    </view>
+  </view>
+  <view class="my-inf2" bindtap="getorder">
+    我的订单
+  </view>
+  <view class="my-inf3" bindtap="escprogram">
+    <text class="psty4" >{{state}}</text>
+  </view>
+  <image src="../../images/mybottombg.png" class="myimg3"></image>
+
+
+
+</view>

@@ -1,0 +1,75 @@
+<!--pages/order/index.wxml-->
+<view class="order-page page2">
+<view class="order-pa1">
+<image src="{{customerlogo}}" class="order-logo"></image>
+<view class="pcont3">
+  <view>订单时间：{{orderinf.order_at}}</view>
+  <view>订单编号：{{orderinf.id}}</view>
+  <view>客户名字：{{orderinf.user_realname}}</view>
+</view>
+ <button class="order-btn3" bindtap="cancelorder" hidden="{{!isorderstat}}">取消订单</button>
+<button class="order-btn1" bindtap="gopath" hidden="{{!assshow}}" >行驶记录</button>
+</view>
+<view class="order-pa2">
+  <view class="htitle1">行程详情</view>
+  <view class="pcont1">
+    <text class="picon1">{{staaddr}}</text>
+    <text>行驶路程：{{orderinf.mileage}}</text>
+  </view>
+  <view class="pcont1">
+    <text class="picon2">{{endaddr}}</text>
+    <text>行驶时间：{{orderinf.total_time}}</text>
+  </view>
+
+
+
+  
+</view>
+<view class="order-pa3">
+<view class="htitle2">行程详情</view>
+<view class="pcont2">
+  <text>起步价</text>
+  <text>{{orderinf.start_price}}</text>
+</view>
+<view class="pcont2">
+  <text>里程（公里）</text>
+  <text>{{orderinf.mileage}}</text>
+</view>
+<view class="pcont2">
+  <text>行驶时长（分钟）</text>
+  <text>{{orderinf.total_minute}}</text>
+</view>
+<view class="pcont2">
+  <text>跨区费用</text>
+  <text>{{orderinf.fence_fee}}</text>
+</view>
+<view class="pcont2">
+  <text>优惠金额</text>
+  <text class="col1">{{orderinf.coupon_fee}}</text>
+</view>
+</view>
+<view class="order-pa4">
+<view>总计：<text class="font1">{{money}}</text>({{orderinf.status_name}})</view>
+<button class="order-btn2" hidden="assshow" bindtap="goassess" >评价</button>
+</view>
+
+<view hidden="{{isordershow}}" class="messgebox" catchtap="messgeboxshow">
+</view>
+  <view class="messgebcont" hidden="{{isordershow}}" >
+  <view class="select-box">
+    <view class="select-title">取消订单</view>
+    <view class="select" catchtap="selectTap"><text class="select1">取消原因</text><text class="select2">{{content}}</text></view>
+     <view class='option_box' style='height:{{isshow?(orderitems.length>5?300:orderitems.length*60):0}}rpx;'>
+      <view class='option' style='{{index==orderitems.length-1&&"border:0;"}}' wx:for='{{orderitems}}' wx:key='this' data-index='{{index}}' catchtap='optionTap' data-value="{{item.value}}">{{item.value}}</view>
+    </view>
+    <view class="reasonsty">
+      <textarea placeholder="还想说点啥？写在这里吧！" >{{reason}}</textarea>
+    </view>
+    <view class="cancle-btn" bindtap="putmessage">确定</view>
+  </view>
+</view>
+
+
+
+
+</view>

@@ -1,0 +1,10 @@
+<!--pages/travel/index.wxml-->
+<map id="map" longitude="{{markers[0].longitude}}"  latitude="{{markers[0].latitude}}"  controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location ></map>
+<view class="travel-cont">
+  <view class="travel-cont1">
+    <view class="psty1">¥<text class="font1">{{money}}</text></view>
+    <view class="psty2">{{time}}分钟<text decode="{{true}}">&nbsp;</text>{{distance}}公里</view>
+    <view class="psty3"><view class="psty7">{{staaddr}}</view></view>
+    <view class="psty4"><view class="psty6">{{endaddr}}</view><view class="psty5" bindtap="goassess">评价</view></view>
+  </view>
+</view>

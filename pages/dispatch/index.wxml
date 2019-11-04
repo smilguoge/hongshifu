@@ -1,0 +1,24 @@
+<!--pages/dispatch/index.wxml-->
+<view class="page">
+  <view class="dipa-inf1">
+    <view>当前您附近有超过<text class="font1">15</text>位司机</view>
+    <text class="psty5">为您服务</text>
+  </view>
+  <view class="dipa-inf2">
+    <view class="psty1">选择出发地</view>
+    <view class="psty2">福建省厦门市思明区体育中心</view>
+  </view>
+  <view class="dipa-inf3">
+    <view class="psty3">18元起步，查看服务价格和接单范围</view>
+    <view class="psty4" bindtap="hideModal">呼叫司机</view>
+  </view>  
+</view>
+<view hidden="{{hiddenmodalput}}" class="messgebox">
+  <view class="messgebcont">
+    <view class="inpsty1"><input type='number' placeholder="请输入11位手机号码" /></view>
+    <view class="inpsty2"><input type='number' placeholder="请输入验证码" /><text class="btn2">发送验证码</text></view>
+    <view class="btn1" bindtap="putmessage">确认</view>
+    <view class="showbg" bindtap="hidemessage"></view>
+  </view>
+</view>
+

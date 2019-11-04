@@ -1,0 +1,32 @@
+<!--pages/assess/index.wxml-->
+<view class="pa30">
+    <view class="psty1"><text class="text2">您对本次洪师傅代驾服务师傅满意？</text></view>
+    <view class="psty2">
+    <block wx:for="{{one_2}}" wx:key="index">
+    <text class="img1 active" catchtap='in_xin' id='{{index+1}}' data-in='use_sc2' ></text>
+    </block>
+    <block wx:for="{{two_2}}" wx:key="index">
+    <text class="img1" catchtap='in_xin' id='{{index+1}}' data-in='use_sc' ></text>
+    </block>
+    </view>
+ <!-- <checkbox-group class='psty3' bindchange="checkChange">
+    <label bindtap="click"  wx:for="{{items}}" wx:key="{{items}}" class="text1 {{checked?'active':''}}">
+        <checkbox value="{{item.value}}" name="{{item.value}}"   hidden='true' checked="false"></checkbox>
+            {{item.value}}
+    </label>
+  </checkbox-group> -->
+<checkbox-group class='psty3' bindchange="checkChange">
+    <label bindtap="click"  wx:for="{{items}}" wx:key="{{items}}" class="text1 {{item.checked?'active':''}}">
+        <checkbox value="{{item.key}}" name="{{item.value}}"  checked="{{item.checked}}" hidden='true'></checkbox>
+            {{item.value}}
+    </label>
+  </checkbox-group>
+
+  <view class="psty4">
+    <textarea placeholder="还想说点啥？写在这里吧！">{{reason}}</textarea>
+  </view>
+  <view class="psty5">
+    <checkbox id="name" class="radsty"></checkbox><label for="name">匿名评价</label>
+  </view>
+  <view class="psty6" bindtap="putassess">立即评价</view>
+</view>

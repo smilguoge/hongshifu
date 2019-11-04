@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<view wx:if="{{isHide}}">
+    <view wx:if="{{canIUse}}" >
+        <view class='header'>
+            <image src='../../images/logo.png'></image>
+        </view>
+        <view class='content'>
+            <view>申请获取以下权限</view>
+            <text>获得你的公开信息(昵称，头像等)</text>
+        </view> 
+        <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+            授权登录
+        </button>
+    </view>
+    <view wx:else>请升级微信版本</view>
+</view>
+ 
+<view wx:else class="pheight">
+  <map id="map" longitude="{{myLongitude}}" latitude="{{myLatitude}}" scale="18" bindcontroltap="controltap" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location></map>
+<view class="appoint">
+    <view class="htitle1">
+    <view wx:for="{{navbar}}" wx:key="index" data-indx="{{index}}" bindtap="currentTab" class="{{currentindex==index ? ('psty'+index + ' active') : ('psty'+index)}}">
+    <view class="psty5">{{item}}</view></view>
+  </view>
+  <view class="appoint-cont1" hidden="{{currentindex===1}}" >
+    <view class="appoint-cont2">
+      <view class="psty3"><input placeholder="请输入起始地址" value="{{staraddr}}" bindtap="getLocation"></input></view>
+    </view>
+    <view class="btn1"  bindtap="subdrive1">预约代驾</view>
+ </view>
+<view class="appoint-cont3" hidden="{{currentindex===0}}">
+    <view class="appoint-cont2">
+      <view class="psty4"><input placeholder="请输入起始地址" value="{{staraddr}}" bindtap="getLocation"></input></view>
+      <view class="psty6"><input placeholder="请输入联系人联系方式" value="{{tel}}" bindinput="checktel"></input></view>
+    </view>
+    <view class="btn1" bindtap="subdrive2">预约代叫</view>
+</view>
+<view class="my-icon" bindtap="gotomy">我的</view>
+</view>
+</view>
+
+
+

@@ -1,0 +1,98 @@
+/* pages/denglu/index.wxss */
+  .bg image{
+    display: flex;
+    margin: 0 auto ;
+    width: 100%;
+    height: 310rpx;
+    margin-bottom: 100rpx;
+  }
+  .depage{
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    color: #ababab;
+  }
+  .icon1img{
+    width: 35rpx;
+    height: 35rpx;
+    margin-right: 20rpx;
+  }
+  .icon2img{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 20rpx;  
+  }
+  .de-bottom{
+    position: fixed;
+    bottom: 20rpx;
+    width: 100%;
+    text-align: center;
+  }
+  .de-btn{
+    margin: 50rpx 100rpx;
+    border:none;
+    color: #fff;
+    background-color: #ff4457;
+    box-shadow: 0rpx 8rpx 16rpx 0rpx rgba(255, 89, 106, 0.24);
+  	border-radius: 38rpx;
+  }
+.de-cell{
+  margin: 35rpx 100rpx;
+  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 25rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.de-cell2{
+  display: flex;
+  align-items: center;
+}
+.de-cell2 input{padding-right: 15rpx;}
+.de-btn1::after{border:none;}
+.de-btn1::before{border:none;}
+.de-btn1{
+  color: #ff8b96 !important;
+  background-color: #fff !important;
+  border-left: 1px solid #dcdcdc;
+  border-radius: 0;
+  font-size: 30rpx;
+  width: 230rpx;
+  line-height: 1.5;
+  padding-right: 0;
+  padding-left: 20rpx;
+}
+input{
+  font-size: 30rpx;
+  line-height: 2;
+  height: auto;}
+.messgebox{
+position:absolute;
+width: 100%;
+height: 100%;
+top: 0;
+bottom: 0;
+left: 0;
+right:0;
+background-color: rgba(0, 0, 0, .4)
+}
+.messgebcont{
+  background-color: #fff;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  border-radius: 10px;
+  margin: auto;
+  position: absolute;
+  width: calc(100% - 60rpx);
+  height:470rpx;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right:0;  
+  z-index: 2;
+}
+.btncont{
+  display: flex;
+  justify-content: space-around;
+}

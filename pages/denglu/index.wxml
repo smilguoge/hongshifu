@@ -1,0 +1,21 @@
+<!--pages/denglu/index.wxml-->
+<view class="depage">
+<view class="bg">
+<image src="../../images/logobg.png"></image>
+</view>
+<view class="de-cell">
+<image src="../../images/icon1.svg" class="icon1img"></image>
+<input class="weui-input" type="number" placeholder="请输入手机号码" name="phone" maxlength="11" bindblur="inputvalue" />
+</view>
+<view class="de-cell de-cell1">
+<view class="de-cell2">
+<image src="../../images/icon2.svg" class="icon2img"></image>
+<input class="weui-input" type="number" placeholder="请输入验证码"  type="number" bindinput="checkinput"></input>
+</view>
+<button class="de-btn1" bindtap="getcheck" disabled="{{disable}}" hover-class="none">{{codename}}</button>
+</view>
+<button class="de-btn" bindtap="putlogin">登录</button>
+<button class="de-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快速登录</button>
+<!-- <button class="de-btn" bindtap="gettel">微信快速登录</button> -->
+<view class="de-bottom" bindtap="">登录即代表同意洪师傅代驾用户协议</view>
+</view>

@@ -17,7 +17,7 @@ Page({
   },
   putregist:function(){
     const that = this;
-    let token = wx.getStorageSync('token').token
+    let token = wx.getStorageSync('token').access_token
     if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(that.data.tel))) {
       wx.showToast({
         title: '手机号不正确',
@@ -48,7 +48,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let openid=wx.getStorageSync('session')
+    let openid = wx.getStorageSync('session').openid
     this.setData({
       openid: openid
     })

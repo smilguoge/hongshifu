@@ -16,7 +16,9 @@
 </view>
  
 <view wx:else class="pheight">
-  <map id="map" longitude="{{myLongitude}}" latitude="{{myLatitude}}" scale="18" bindcontroltap="controltap" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location></map>
+  <map id="map" longitude="{{myLongitude}}" latitude="{{myLatitude}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location>
+  <cover-image class="img-map" src="../../images/marker.png"></cover-image>
+  </map>
 <view class="appoint">
     <view class="htitle1">
     <view wx:for="{{navbar}}" wx:key="index" data-indx="{{index}}" bindtap="currentTab" class="{{currentindex==index ? ('psty'+index + ' active') : ('psty'+index)}}">

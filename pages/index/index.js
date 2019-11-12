@@ -237,14 +237,12 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res){
-        console.log(res.data.code)
         if (res.data.code===200){
           if (res.data.data.total>0){
             let drivers = res.data.data.list
-            let driversmap=that.data.markers
             drivers=drivers.map(function (driver,index){
               return {
-                iconPath: "../../images/marker.png",
+                iconPath: "../../images/logo.png",
                 longitude: driver.lng,
                 latitude: driver.lat,
                 width: 30,
@@ -252,10 +250,8 @@ Page({
                 id:index++
               }
             })
-            let driverss = [ ...drivers]
-            console.log(driverss)
             that.setData({
-              markers: driverss
+              markers: drivers
             })
             
           

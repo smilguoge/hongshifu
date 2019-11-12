@@ -49,7 +49,7 @@ Page({
         token: token.access_token,
       },
       method:'post',
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(){
         getCurrentPages()[getCurrentPages().length - 1].onLoad()
         wx.showToast({
@@ -105,7 +105,7 @@ Page({
         token: token.access_token,
         id:that.options.id
       },
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(res){
         if (res.data.data.avatar_url){
             that.setData({customerlogo: res.data.data.avatar_url})
@@ -120,11 +120,19 @@ Page({
         if (res.data.data.status == 60) {
           that.setData({ assshow: true })
         }
+        if (res.data.data.order_address.length>12){
+          that.setData({
+            staaddr: res.data.data.order_address.substring(0, 12) +"..."
+          })
+        }
+        if (res.data.data.order_destination_address.length > 12) {
+          that.setData({
+            staaddr: res.data.data.order_destination_address.substring(0, 12) + "..."
+          })
+        }
         that.setData({
             orderinf: res.data.data,
             id: that.options.id,
-            staaddr: res.data.data.order_address,
-            endaddr: res.data.data.order_destination_address,
             money: res.data.data.money,
             status: res.data.data.status,
             drivtime: res.data.data.driving_minute,

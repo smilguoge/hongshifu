@@ -71,7 +71,7 @@ Page({
         evaluate_reason: that.data.reason,
       },
       method:'post',
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(res){
         wx.navigateBack();
       }
@@ -86,7 +86,7 @@ Page({
     wx.request({
       url: wx.getStorageSync('config').item_url,
       data:{pid:'ORDER_EVALUATE'},
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(res){
         that.setData({
           items: res.data.data,

@@ -19,6 +19,8 @@ var config={
   openid_url: host + '/api/wechat/mini_program/openid', 
   evaluate_url: host + '/api/order/evaluate',
   userinfo_url: host + '/api/wechat/mini_program/userinfo',
-  senduser_url: host + '/api/sendorder/senduser'
+  senduser_url: host + '/api/sendorder/senduser',
+  driverlist_url: host + '/api/driver/lists'
 }
-module.exports=config;
+var header = { 'x-service-id': '1' }
+module.exports = {config, header}

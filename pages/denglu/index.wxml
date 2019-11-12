@@ -5,7 +5,8 @@
 </view>
 <view class="de-cell">
 <image src="../../images/icon1.svg" class="icon1img"></image>
-<input class="weui-input" type="number" placeholder="请输入手机号码" name="phone" maxlength="11" bindblur="inputvalue" />
+<input class="weui-input" type="number" placeholder="请输入手机号码" name="phone" maxlength="11" 
+bindinput="inputvalue" />
 </view>
 <view class="de-cell de-cell1">
 <view class="de-cell2">

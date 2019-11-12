@@ -33,7 +33,7 @@ Page({
         token: token       
       },
       method:'post',
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(res){
         wx.navigateBack({
           delta:1 

@@ -56,7 +56,7 @@ Page({
         // id: that.data.id
         id:'201910121658196504'
       },
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(res){
         console.log(res.data.data)
         const data = res.data.data
@@ -83,7 +83,7 @@ Page({
         // id: that.data.id
         id: '201910121658196504'
       },
-      header: { 'x-service-id': '1' },
+      header: wx.getStorageSync('header'),
       success(res) {
         let data = res.data.data.points;
         let points=[];

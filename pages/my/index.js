@@ -31,7 +31,7 @@ Page({
          data: {
            token: token.access_token
          },
-         header: { 'x-service-id': '1' },
+         header: wx.getStorageSync('header'),
         success(res) {
            if (res.data.data.avatar_url!==''){
              that.setData({
@@ -78,7 +78,7 @@ Page({
          data: {
            token: token.access_token
          },
-         header: { 'x-service-id': '1' },
+         header: wx.getStorageSync('header'),
          success(res) {
            wx.removeStorageSync('token')
            that.setData({
@@ -116,7 +116,7 @@ Page({
       //   data: {
       //     token: token.access_token
       //   },
-      //   header: { 'x-service-id': '1' },
+      //   header: wx.getStorageSync('header'),
       //   success(res) {
       //     wx.clearStorageSync('token')
       //     that.setData({

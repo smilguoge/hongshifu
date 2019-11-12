@@ -39,7 +39,7 @@ Page({
           encryptedData: e.detail.encryptedData,
           iv: e.detail.iv,
         },
-        header: { 'x-service-id': '1' },
+        header: wx.getStorageSync('header'),
         success(res) {
           wx.setStorageSync('phone', res.data.data.phoneNumber);
           wx.request({
@@ -51,7 +51,7 @@ Page({
               service_id: '1'
             },
             method: 'post',
-            header: { 'x-service-id': '1' },
+            header: wx.getStorageSync('header'),
             success(res) {
               wx.request({
                 url: wx.getStorageSync('config').quick_login_url,
@@ -60,7 +60,7 @@ Page({
                   platform: 'mini_program,'
                 },
                 method: 'post',
-                header: { 'x-service-id': '1' },
+                header: wx.getStorageSync('header'),
                 success(res) {
                   wx.setStorageSync('token', res.data.data);//存储token
                   let createTime = new Date();
@@ -85,7 +85,7 @@ Page({
           platform: 'mini_program,'
         },
         method: 'post',
-        header: { 'x-service-id': '1' },
+        header: wx.getStorageSync('header'),
         success(res) {
           wx.setStorageSync('token', res.data.data);//存储token
           let createTime = new Date();
@@ -107,6 +107,7 @@ Page({
   },
   putlogin: function () {
     const that=this;
+    if ((/^1(3|4|5|6|7|8|9)\d{9}$/.test(that.data.mobile)) && (/[0-9]{4}/.test(that.data.smsvcode))) {
     wx.request({
       url: wx.getStorageSync('config').login_url,
       data:{
@@ -116,7 +117,7 @@ Page({
         openid: that.data.openid,
       },
     method: "post",
-    header: { 'x-service-id': '1' },
+    header: wx.getStorageSync('header'),
     success(res){
       if (res.data.code == 200){
         let token = res.data.data;
@@ -142,7 +143,22 @@ Page({
     },
     fail() {
     }
-  })
+      })
+    } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(that.data.mobile))){
+      wx.showToast({
+        title: '手机号码错误!',
+        icon: 'error',
+        duration: 2000
+      })
+
+  }else{
+      wx.showToast({
+        title: '验证码错误!',
+        icon: 'error',
+        duration: 2000
+      })
+
+  }
     },
   inputvalue:function(e){
     this.setData({
@@ -174,7 +190,7 @@ Page({
             type: 'login',
             mobile:that.data.mobile            
           },
-         header: { 'x-service-id': '1' },
+         header: wx.getStorageSync('header'),
           success(res){
            timer=setInterval(function(){
              num--;

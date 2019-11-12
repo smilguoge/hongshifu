@@ -21,7 +21,8 @@ Page({
     longitude: '',
     latitude: '',
     myLatitude: 0.0,
-    myLongitude: 0.0
+    myLongitude: 0.0,
+
   },
   currentTab: function (e) {
     if (this.data.currentindex == e.currentTarget.dataset.indx) {
@@ -36,7 +37,9 @@ Page({
       url: '/pages/my/index' // 跳转到新页面
     })
   },
-  onShow:function(){
+  onShow:function(){  
+    console.log(wx.getStorageSync('session').openid)
+    // this.getdriverlist()
 
   },
   onLoad: function () {
@@ -76,6 +79,7 @@ Page({
       openid: wx.getStorageSync('session').openid,
       token: wx.getStorageSync('token').access_token
     })
+
   },
   subdrive1: function () {
     const that = this;
@@ -103,7 +107,7 @@ Page({
           order_destination_lat: '',
           token: that.data.token
         },
-        header: { 'x-service-id': '1' },
+        header: wx.getStorageSync('header'),
         method: "post",
         success(res) {
           wx.navigateTo({
@@ -137,17 +141,9 @@ Page({
           mp_openid: that.data.openid,
           token: that.data.token,
         },
-        header: { 'x-service-id': '1' },
+        header: wx.getStorageSync('header'),
         success(res) {
-          if (res.data.code === 401){
-            wx.navigateTo({
-              url: '/pages/denglu/index',
-            })
-          } else if(res.data.code === 422) {
-            wx.navigateTo({
-              url: '/pages/registe/index',
-            })
-          } else if (res.data.code === 200) {
+          if (res.data.code === 200){
             wx.request({
               url: wx.getStorageSync('config').calling_url,
               data: {
@@ -156,7 +152,7 @@ Page({
                 order_lat: that.data.myLatitude,
                 token: that.data.token,
               },
-              header: { 'x-service-id': '1' },
+              header: wx.getStorageSync('header'),
               method: 'post',
               success(res) {
                 wx.showToast({
@@ -175,6 +171,15 @@ Page({
 
               }
             })
+          } else if(res.data.code === 422) {
+            wx.navigateTo({
+              url: '/pages/registe/index',
+            })
+          } else if (res.data.code === 401) {
+            wx.navigateTo({
+              url: '/pages/denglu/index',
+            })
+
           }
         }
 
@@ -222,8 +227,49 @@ Page({
   /**
    * 获取中间点的经纬度，并mark出来
    */
+  getdriverlist(lng = this.data.longitude, lat = this.data.longitude){
+    const that=this;
+    wx.request({
+      url: wx.getStorageSync('config').driverlist_url,
+      data:{
+        order_lng: that.data.longitude,
+        order_lat: that.data.latitude, 
+      },
+      header: wx.getStorageSync('header'),
+      success(res){
+        console.log(res.data.code)
+        if (res.data.code===200){
+          if (res.data.data.total>0){
+            let drivers = res.data.data.list
+            let driversmap=that.data.markers
+            drivers=drivers.map(function (driver,index){
+              return {
+                iconPath: "../../images/marker.png",
+                longitude: driver.lng,
+                latitude: driver.lat,
+                width: 30,
+                height: 30,
+                id:index++
+              }
+            })
+            let driverss = [driversmap[0], ...drivers]
+            console.log(driverss)
+            // that.setData({
+            //   markers: driverss
+            // })
+            
+          
+
+          }
+        }
+      },
+      fail(){}
+
+    })
+
+  },
   getLngLat() {
-    let that = this;
+    const that = this;
     that.mapCtx = wx.createMapContext("map");
     that.mapCtx.getCenterLocation({
       success: function (res) {
@@ -235,9 +281,13 @@ Page({
             latitude: res.latitude,
             width: 30,
             height: 30
-          }]
+          }],
+          longitude: res.longitude,
+          latitude: res.latitude
         })
         that.getPoiList(res.longitude, res.latitude)
+        that.getdriverlist(res.longitude, res.latitude)
+
       }
     })
   },

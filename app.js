@@ -1,9 +1,10 @@
 //app.js
-var config=require("./config.js");
+var {config,header}=require("./config.js");
 App({
   onLaunch: function () {
     // 展示本地存储能力
     wx.setStorageSync('config', config)
+    wx.setStorageSync('header', header)
      let time = new Date();
      let createTime = wx.getStorageSync('createTime');
      let token = wx.getStorageSync('token');
@@ -14,14 +15,14 @@ App({
            wx.request({
              url: wx.getStorageSync('config').openid_url,
              data: { code: code },
-             header: { 'x-service-id': '1' },
+             header: wx.getStorageSync('header'),
              success(res){
                let session = res.data.data;
                wx.setStorageSync('session', session);//信息存储openid和session
              },
              fail() {
                wx.showToast({
-                 title: '请重新刷新!',
+                 title: '退出重新登录!',
                 icon: 'error',
                  duration: 2000
                })

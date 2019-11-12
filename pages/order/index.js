@@ -22,10 +22,41 @@ Page({
       url: '/pages/assess/index?id=' + e.currentTarget.dataset.id,
     })
   },
+  getorderlist(){
+    const that = this;
+    const token = wx.getStorageSync('token');
+    const orderinfs = [];
+    wx.request({
+      url: wx.getStorageSync('config').list_url,
+      data: {
+        token: token.access_token,
+        is_warm: 0,
+        page: that.data.page,
+        limit: that.data.limit
+      },
+      header: wx.getStorageSync('header'),
+      success(res) {
+        let orderinfs = res.data.data.list
+        orderinfs.forEach((item) => {
+          item.order_at = item.order_at.substring(5, 16)
+          if (item.order_destination_address.length > 13) {
+            item.order_destination_address = item.order_destination_address.substring(0, 13) + '...'
+          }
+        })
+        that.setData({
+          orderinfs: orderinfs
+        })
+
+
+      }
+
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getorderlist()
   },
 
   /**
@@ -39,32 +70,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const that = this;
-    const token = wx.getStorageSync('token');
-    const orderinfs = [];
-    wx.request({
-      url: wx.getStorageSync('config').list_url,
-      data: {
-        token: token.access_token,
-        is_warm: 0,
-        page: that.data.page,
-        limit: that.data.limit
-      },
-      header: { 'x-service-id': '1' },
-      success(res) {
-        let orderinfs = res.data.data.list
-        orderinfs.forEach((item) => {
-          item.order_at = item.order_at.substring(5, 16)
-        })
-        that.setData({
-          orderinfs: orderinfs
-        })
 
-
-      }
-
-    })
-
+    this.getorderlist()
 
   },
 
@@ -95,7 +102,7 @@ Page({
   onReachBottom: function () {
     var that = this;
     that.setData({
-      limit: that.data.limit + 3
+      limit: that.data.limit + 4
     })
     that.onLoad(); //重新加载onLoad()
   },

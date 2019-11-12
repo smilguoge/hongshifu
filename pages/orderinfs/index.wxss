@@ -83,7 +83,7 @@
   left: 0;
 }
 .picon1{
-  margin-right: 26rpx;
+  margin-right: 30rpx;
   }
 .picon1::before{background-color: #44bfa3;}
 .picon2::before{background-color: #fe5252;}

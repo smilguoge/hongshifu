@@ -252,11 +252,11 @@ Page({
                 id:index++
               }
             })
-            let driverss = [driversmap[0], ...drivers]
+            let driverss = [ ...drivers]
             console.log(driverss)
-            // that.setData({
-            //   markers: driverss
-            // })
+            that.setData({
+              markers: driverss
+            })
             
           
 
@@ -274,14 +274,14 @@ Page({
     that.mapCtx.getCenterLocation({
       success: function (res) {
         that.setData({
-          markers: [{
-            id: 0,
-            iconPath: "../../images/marker.png",
-            longitude: res.longitude,
-            latitude: res.latitude,
-            width: 30,
-            height: 30
-          }],
+          // markers: [{
+          //   id: 0,
+          //   iconPath: "../../images/marker.png",
+          //   longitude: res.longitude,
+          //   latitude: res.latitude,
+          //   width: 30,
+          //   height: 30
+          // }],
           longitude: res.longitude,
           latitude: res.latitude
         })

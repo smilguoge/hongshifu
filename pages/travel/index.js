@@ -22,7 +22,7 @@ Page({
     },
       {
         iconPath: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS41NiA0Ni45MiI+PGcgZGF0YS1uYW1lPSLlm77lsYIgMiI+PGcgZGF0YS1uYW1lPSLlm77lsYIgMSI+PHBhdGggZD0iTTMxLjU2IDE1Ljc4YzAgOC43MS0xNS43OCAzMS4xNC0xNS43OCAzMS4xNFMwIDI0LjQ5IDAgMTUuNzhhMTUuNzggMTUuNzggMCAwIDEgMzEuNTYgMHoiIGZpbGw9IiNmZTRhNGMiLz48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCguOTMgMCAwIDEgNy42OSAyMi4wMSkiIGZvbnQtc2l6ZT0iMTcuMzIiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJTb3VyY2VIYW5TYW5zQ04tTWVkaXVtLUdCcGMtRVVDLUgsU291cmNlIEhhbiBTYW5zIENOIj7nu4g8L3RleHQ+PC9nPjwvZz48L3N2Zz4=",
-        id: 0,
+        id: 1,
         longitude: '',
         latitude: '',
         width: 30,
@@ -47,14 +47,12 @@ Page({
     const that = this;
     const token = wx.getStorageSync('token');
     that.setData({id:options.id});
-    let markla0 = 'markers[' + 0 + '].latitude', markla1 = 'markers[' + 1 + '].latitude', markln0 = 'markers[' + 0 + '].longitude', markln1 = 'markers[' + 1 + '].longitude';
+    let markla0 = 'markers[' + 0 + '].latitude', markln0 = 'markers[' + 0 + '].longitude', markla1 = 'markers[' + 1 + '].latitude',  markln1 = 'markers[' + 1 + '].longitude';
     wx.request({
       url: wx.getStorageSync('config').detail_url,
       data: {
-        // token: token.access_token,
-        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuYnpmZnMuY2NcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NzIzMTE2ODIsImV4cCI6MTU3MzUyMTI4MiwibmJmIjoxNTcyMzExNjgyLCJqdGkiOiJvdUl2dGE0NG5CRlowbHlxIiwic3ViIjoyNzkwMDgsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0iJYl4wjUcrcOQRRK8lfWhFS3SZs9iQtJ4JgZc63bdU',
-        // id: that.data.id
-        id:'201910121658196504'
+         token: token.access_token,
+        id: that.data.id
       },
       header: wx.getStorageSync('header'),
       success(res){
@@ -73,32 +71,35 @@ Page({
           [markla1]: data.destination_lat,
           [markln1]: data.destination_lng,
         })
+        
 
       }
     })
     wx.request({
       url: wx.getStorageSync('config').tracker_url,
       data: {
-        token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcGkuYnpmZnMuY2NcL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1NzIzMTE2ODIsImV4cCI6MTU3MzUyMTI4MiwibmJmIjoxNTcyMzExNjgyLCJqdGkiOiJvdUl2dGE0NG5CRlowbHlxIiwic3ViIjoyNzkwMDgsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.0iJYl4wjUcrcOQRRK8lfWhFS3SZs9iQtJ4JgZc63bdU',
-        // id: that.data.id
-        id: '201910121658196504'
+        token: token.access_token,
+        id: that.data.id
       },
       header: wx.getStorageSync('header'),
       success(res) {
         let data = res.data.data.points;
         let points=[];
         let opp = 'polyline[' + 0 + '].points'
-        data.forEach(r=>{
-          let num = r.location.indexOf(',')
-          let ln = r.location.substring(0, num), la = r.location.substring(num+1);
-          const laln={
-            longitude: ln,
-            latitude: la}
-          points.push(laln)
-        })      
-        that.setData({
-          [opp]: points
-        })
+        if (data.length>0){
+          data.forEach(r => {
+            let num = r.location.indexOf(',')
+            let ln = r.location.substring(0, num), la = r.location.substring(num + 1);
+            const laln = {
+              longitude: ln,
+              latitude: la
+            }
+            points.push(laln)
+          })
+          that.setData({
+            [opp]: points
+          })
+        }
         
       }
 

@@ -81,6 +81,9 @@ Page({
     })
 
   },
+  refreshloction(){
+    this.mapCtx.moveToLocation();
+  },
   subdrive1: function () {
     const that = this;
     console.log(that.data.token)
@@ -242,7 +245,7 @@ Page({
             let drivers = res.data.data.list
             drivers=drivers.map(function (driver,index){
               return {
-                iconPath: "../../images/logo.png",
+                iconPath: "../../images/drivericon.png",
                 longitude: driver.lng,
                 latitude: driver.lat,
                 width: 30,
@@ -270,14 +273,6 @@ Page({
     that.mapCtx.getCenterLocation({
       success: function (res) {
         that.setData({
-          // markers: [{
-          //   id: 0,
-          //   iconPath: "../../images/marker.png",
-          //   longitude: res.longitude,
-          //   latitude: res.latitude,
-          //   width: 30,
-          //   height: 30
-          // }],
           longitude: res.longitude,
           latitude: res.latitude
         })

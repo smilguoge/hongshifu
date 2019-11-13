@@ -8,9 +8,8 @@ Page({
   data: {
     string1:'评价',
     orderinfs:{},
-    limit:3,
-    pages:1,
-    is_warm:0,
+    limit:4,
+    pages:1
   },
   goorderinf:function(e){
     wx.navigateTo({
@@ -30,19 +29,22 @@ Page({
       url: wx.getStorageSync('config').list_url,
       data: {
         token: token.access_token,
-        is_warm: 0,
         page: that.data.page,
         limit: that.data.limit
       },
       header: wx.getStorageSync('header'),
       success(res) {
+        console.log(res.data.data.list)
         let orderinfs = res.data.data.list
-        orderinfs.forEach((item) => {
-          item.order_at = item.order_at.substring(5, 16)
-          if (item.order_destination_address.length > 13) {
-            item.order_destination_address = item.order_destination_address.substring(0, 13) + '...'
-          }
-        })
+        if (orderinfs.length>0){
+          orderinfs.forEach((item) => {
+            item.order_at = item.order_at.substring(5, 16)
+            if (item.order_destination_address.length > 13) {
+              item.order_destination_address = item.order_destination_address.substring(0, 13) + '...'
+            }
+          })
+        }
+
         that.setData({
           orderinfs: orderinfs
         })

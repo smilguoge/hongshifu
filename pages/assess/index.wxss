@@ -1,5 +1,5 @@
 /* pages/assess/index.wxss */
-page{background-color:beige;}
+page{background-color:#fff;}
 .pa30{padding: 30rpx;}
 .psty6{
   color: #fff;

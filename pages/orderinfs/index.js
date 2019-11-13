@@ -92,6 +92,7 @@ Page({
   onLoad: function (options) {
     const that=this;
     const token = wx.getStorageSync('token');
+    let staradds,endadds;
     wx.request({
       url: wx.getStorageSync('config').item_url,
       data:{pid:'ORDER_EVALUATE' },
@@ -107,6 +108,8 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res){
+        console.log(res)
+        console.log(res.data.data.order_address.length > 12)
         if (res.data.data.avatar_url){
             that.setData({customerlogo: res.data.data.avatar_url})
         }else{
@@ -120,19 +123,21 @@ Page({
         if (res.data.data.status == 60) {
           that.setData({ assshow: true })
         }
-        if (res.data.data.order_address.length>12){
-          that.setData({
-            staaddr: res.data.data.order_address.substring(0, 12) +"..."
-          })
+        if (res.data.data.order_address.length > 12){
+             staradds=res.data.data.order_address.substring(0, 12) + '...'
+        }else{
+           staradds = res.data.data.order_address
         }
         if (res.data.data.order_destination_address.length > 12) {
-          that.setData({
-            staaddr: res.data.data.order_destination_address.substring(0, 12) + "..."
-          })
-        }
+          endadds=res.data.data.order_destination_address.substring(0, 12) + '...'
+        }else{
+          endadds = res.data.data.order_destination_address
+        }      
         that.setData({
             orderinf: res.data.data,
             id: that.options.id,
+            staaddr: staradds,
+            endaddr: endadds,
             money: res.data.data.money,
             status: res.data.data.status,
             drivtime: res.data.data.driving_minute,

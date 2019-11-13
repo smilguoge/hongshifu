@@ -16,7 +16,7 @@
   </view>
   <view class="pcont4">
   <text class="tex3">￥<text class="tex4">{{item.money}}</text></text>
-  <text class="btn1" hidden="{{item.status==60}}" bindtap="goassess" data-id="{{item.id}}">{{string1}}</text>
+  <text class="btn1" hidden="{{!(item.status==60)}}" bindtap="goassess" data-id="{{item.id}}">{{string1}}</text>
   </view>
 </view>
 </view>

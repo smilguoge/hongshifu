@@ -17,7 +17,6 @@ Page({
   },
   putregist:function(){
     const that = this;
-    let token = wx.getStorageSync('token').access_token
     if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(that.data.tel))) {
       wx.showToast({
         title: '手机号不正确',
@@ -29,15 +28,29 @@ Page({
       url: wx.getStorageSync('config').register_url,
       data:{
         mobile: that.data.tel,
-        openid: that.data.openid,
-        token: token       
+        mp_openid: that.data.openid,
+        token: that.data.token       
       },
       method:'post',
       header: wx.getStorageSync('header'),
       success(res){
-        wx.navigateBack({
-          delta:1 
-        })
+        if (res.data.code===200){
+          wx.showToast({
+            title: '申请成功！',
+            icon: 'success',
+            duration: 1800
+          })
+          wx.navigateBack({
+            delta: 1
+          })
+        }else{
+          wx.showToast({
+            title: '失败重新申请！',
+            icon: 'error',
+            duration: 1800
+          })
+
+        }
 
       }
 
@@ -49,8 +62,10 @@ Page({
    */
   onLoad: function (options) {
     let openid = wx.getStorageSync('session').openid
+    let token = wx.getStorageSync('token').access_token
     this.setData({
-      openid: openid
+      openid: openid,
+      token: token
     })
 
   },

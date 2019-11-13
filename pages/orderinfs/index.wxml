@@ -14,38 +14,34 @@
   <view class="htitle1">行程详情</view>
   <view class="pcont1">
     <text class="picon1">{{staaddr}}</text>
-    <text>行驶路程：{{orderinf.mileage}}</text>
+    <text>行驶路程：{{orderinf.mileage}}公里</text>
   </view>
   <view class="pcont1">
     <text class="picon2">{{endaddr}}</text>
-    <text>行驶时间：{{orderinf.total_time}}</text>
-  </view>
-
-
-
-  
+    <text>行驶时间：{{orderinf.total_time}}分钟</text>
+  </view>  
 </view>
 <view class="order-pa3">
 <view class="htitle2">行程详情</view>
 <view class="pcont2">
   <text>起步价</text>
-  <text>{{orderinf.start_price}}</text>
+  <text>{{orderinf.start_price}}元</text>
 </view>
 <view class="pcont2">
   <text>里程（公里）</text>
-  <text>{{orderinf.mileage}}</text>
+  <text>{{orderinf.mileage}}公里</text>
 </view>
 <view class="pcont2">
   <text>行驶时长（分钟）</text>
-  <text>{{orderinf.total_minute}}</text>
+  <text>{{orderinf.total_minute}}分钟</text>
 </view>
 <view class="pcont2">
   <text>跨区费用</text>
-  <text>{{orderinf.fence_fee}}</text>
+  <text>{{orderinf.fence_fee}}元</text>
 </view>
 <view class="pcont2">
   <text>优惠金额</text>
-  <text class="col1">{{orderinf.coupon_fee}}</text>
+  <text class="col1">{{orderinf.coupon_fee}}元</text>
 </view>
 </view>
 <view class="order-pa4">

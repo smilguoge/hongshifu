@@ -15,9 +15,19 @@ Page({
     statenum:true,
   },
   getorder:function(){
-    wx.navigateTo({
-      url: '/pages/order/index',
-    })
+    let token = wx.getStorageSync('token');
+    let time = new Date();
+    let createTime = wx.getStorageSync('createTime');
+    if (token && !(time - createTime > 14 * 24 * 3600 * 1000)){
+      wx.navigateTo({
+        url: '/pages/order/index',
+      })
+    }else{
+      wx.redirectTo({
+        url: '/pages/denglu/index',
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -67,7 +77,6 @@ Page({
   escprogram:function(){
     const that=this;
     let token = wx.getStorageSync('token');
-    console.log(that.data.statenum)
     if (that.data.statenum){
       wx.redirectTo({
         url: '/pages/denglu/index',

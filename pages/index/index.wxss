@@ -1,6 +1,6 @@
 /**index.wxss**/
 page{font-size: 28rpx;background-color: #fff;height: 100%}
-.pheight{height: 100%}
+.pheight{height: 100%;position: relative;}
 map{width: 100%;height: 100%;
 position: relative;}
 input{height: 3.5em;font-size: 28rpx;}
@@ -159,18 +159,40 @@ background-size: 50rpx;
 
 }
 .img-map{
-	width: 54rpx;
-	height: 54rpx;
+	width: 40rpx;
+	height: 60rpx;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%); 
 }
 .img-map2{
-  width: 54rpx;
-	height: 54rpx;
-	position: absolute;
-	top: 20%;
-	right: 10%;
+  width: 76rpx;
+	height: 76rpx;
+	position: fixed;
+	top: 70rpx;
+	right: 0rpx;
 	transform: translate(-50%,-50%); 
+  background-color: #fff;
+  border-radius: 10rpx;
+
+}
+.img-map3{
+  width: 18rpx;
+  height: 18rpx;
+  border: solid 1px #61cf9f;
+  padding: 15rpx;
+  margin: auto;
+  margin-top: 14rpx;
+  background-color:#fff;
+  content: ' ';
+  border-radius: 50%;
+}
+.img-map4{
+  width: 18rpx;
+  height: 18rpx;
+  content:' ';
+  background-color:#61cf9f;
+  display: block;
+  border-radius: 50%
 }

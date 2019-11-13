@@ -13,20 +13,20 @@ Page({
     money: '',
     traveldata:{},
     markers: [{
-      iconPath: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS41NiA0Ni45MiI+PGcgZGF0YS1uYW1lPSLlm77lsYIgMiI+PGcgZGF0YS1uYW1lPSLlm77lsYIgMSI+PHBhdGggZD0iTTMxLjU2IDE1Ljc4YzAgOC43MS0xNS43OCAzMS4xNC0xNS43OCAzMS4xNFMwIDI0LjQ5IDAgMTUuNzhhMTUuNzggMTUuNzggMCAwIDEgMzEuNTYgMHoiIGZpbGw9IiMxNzk3ZTQiLz48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCguOTMgMCAwIDEgNy42OSAyMi4wMSkiIGZvbnQtc2l6ZT0iMTcuMzIiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJTb3VyY2VIYW5TYW5zQ04tTWVkaXVtLUdCcGMtRVVDLUgsU291cmNlIEhhbiBTYW5zIENOIj7otbc8L3RleHQ+PC9nPjwvZz48L3N2Zz4=",
+      iconPath: "../../images/straicon.png",
       id: 0,
       latitude: '',
       longitude: '',
-      width: 30,
-      height: 30
+      width: 28,
+      height: 40
     },
       {
-        iconPath: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS41NiA0Ni45MiI+PGcgZGF0YS1uYW1lPSLlm77lsYIgMiI+PGcgZGF0YS1uYW1lPSLlm77lsYIgMSI+PHBhdGggZD0iTTMxLjU2IDE1Ljc4YzAgOC43MS0xNS43OCAzMS4xNC0xNS43OCAzMS4xNFMwIDI0LjQ5IDAgMTUuNzhhMTUuNzggMTUuNzggMCAwIDEgMzEuNTYgMHoiIGZpbGw9IiNmZTRhNGMiLz48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCguOTMgMCAwIDEgNy42OSAyMi4wMSkiIGZvbnQtc2l6ZT0iMTcuMzIiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJTb3VyY2VIYW5TYW5zQ04tTWVkaXVtLUdCcGMtRVVDLUgsU291cmNlIEhhbiBTYW5zIENOIj7nu4g8L3RleHQ+PC9nPjwvZz48L3N2Zz4=",
+        iconPath: "../../images/endicon.png",
         id: 1,
         longitude: '',
         latitude: '',
-        width: 30,
-        height: 30
+        width: 28,
+        height: 40
       }],
     polyline: [{
       points: [{ }],

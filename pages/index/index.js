@@ -39,7 +39,6 @@ Page({
   },
   onShow:function(){  
     console.log(wx.getStorageSync('session').openid)
-    // this.getdriverlist()
 
   },
   onLoad: function () {
@@ -248,8 +247,8 @@ Page({
                 iconPath: "../../images/drivericon.png",
                 longitude: driver.lng,
                 latitude: driver.lat,
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
                 id:index++
               }
             })

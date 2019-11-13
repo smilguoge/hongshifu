@@ -17,8 +17,10 @@
  
 <view wx:else class="pheight">
   <map id="map" longitude="{{myLongitude}}" latitude="{{myLatitude}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location>
-  <cover-image class="img-map" src="../../images/marker.png"></cover-image>
-  <cover-image class="img-map2" src="../../images/marker.png" bindtap="refreshloction"></cover-image>
+  <cover-image class="img-map" src="../../images/marker1.png"></cover-image>
+  <cover-view class="img-map2" bindtap="refreshloction">
+  <cover-view class="img-map3"><cover-view class="img-map4"></cover-view></cover-view>
+  </cover-view>
   </map>
 <view class="appoint">
     <view class="htitle1">
@@ -38,9 +40,8 @@
     </view>
     <view class="btn1" bindtap="subdrive2">预约代叫</view>
 </view>
-<view class="my-icon" bindtap="gotomy">我的</view>
-
 </view>
+<view class="my-icon" bindtap="gotomy">我的</view>
 </view>
 
 

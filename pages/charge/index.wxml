@@ -6,7 +6,13 @@
     <text class="text1">所在城市</text>
     <text class="text2">切换</text>
   </view>
-  <view class="psty3"></view>
+  <view class="psty3">
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      {{multiArray[0][multiIndex[0]]}}/{{multiArray[1][multiIndex[1]]}}/{{multiArray[2][multiIndex[2]]}}
+    </view>
+  </picker>
+  </view>
 </view>
 <view class="psty4">
   <view class="psty6">

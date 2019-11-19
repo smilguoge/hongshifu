@@ -3,7 +3,6 @@
 const app = getApp()
 // 引入SDK核心类
 var QQMapWX = require('../libs/qqmap-wx-jssdk.js');
-
 // 实例化API核心类
 var qqmapsdk = new QQMapWX({
   key: 'YGSBZ-QANC4-M2YUA-X2HI3-5AT6Q-JEBIJ' // 必填
@@ -14,7 +13,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region: ['北京市', '北京市', '东城区'],
     thisSheng: 0,
     multiIndex: [0, 0, 0]
   },
@@ -39,11 +37,32 @@ Page({
         }
       }
     }
-    console.log(sheng)
     this.setData({
       multiArray: [sheng, shi, qu]
     });
 
+  },
+  getpriceinfo(){
+    const that=this
+    wx.request({
+      url: wx.getStorageSync('config').charstan_url,
+      data: {
+        id: that.data.code
+      },
+      header: wx.getStorageSync('header'),
+      success(res){
+        console.log(res)
+        if(res.data.code==200){
+          console.log(res)
+
+        } else if (res.data.code == 422){
+          console.log('没有开通')
+        }else{
+
+        }
+
+      }
+    })
   },
   onLoad: function (options) {
     const that = this
@@ -61,35 +80,66 @@ Page({
           ssl: res.data.data
         })
         that.getlist()
+        console.log(res.data.data)
       }
     })
   },
   getDistrict(latitude, longitude) {
     const that = this
+    const ssls=this.data.ssl
     wx.request({
       url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${keys}`,
       header: {
         'Content-Type': 'application/json'
       },
       success(res) {
-        console.log(res.data.result)
+        const data = that.data.ssl
         const city = res.data.result.ad_info.name.substring(3).split(',')
-        // const sheng=[city[0]]
-        // const shi = [city[1]]
-        // const qu = [city[2]]
+        const sheng=city[0]
+        const shi = city[1]
+        const qu = city[2]
+        let shengcode = data.findIndex(function(item){
+          return item.label == sheng;
+        })
+        let shicode = data[shengcode].children.findIndex(function(item){
+          return item.label == shi;
+        })
+        let qucode = data[shengcode].children[shicode].children.findIndex(function(item){
+          return item.label == qu;
+        })
+        let multiArrayy1 = 'multiArray[' + 1 + ']', multiArrayy2 = 'multiArray[' + 2 + ']';
+        // console.log(data[shengcode].label)
+        // console.log(data[shengcode].children)
+        // console.log(data[shengcode].children[shicode].children)
+        // console.log(shengcode, shicode, qucode)
+        var shiarray=[],quarray=[];
+        for (let ele of data[shengcode].children.values()){
+          shiarray.push(ele.label)
+        }
+        for (let ele of data[shengcode].children[shicode].children.values()) {
+          quarray.push(ele.label)
+        }
         that.setData({
           code: res.data.result.ad_info.adcode,
-          //  multiArray: [sheng, shi, qu]
+          [multiArrayy1]: shiarray,
+          [multiArrayy2]: quarray,
+          multiIndex: [shengcode, shicode, qucode],
+          thisSheng: shengcode
         })
+        that.getpriceinfo()
       }
     })
 
   },
   bindMultiPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
+    let [sheng, shi, qu] = e.detail.value
+    // console.log(this.data.ssl[sheng].children[shi].children[qu].value)
     this.setData({
-      multiIndex: e.detail.value
+      multiIndex: e.detail.value,
+      code: this.data.ssl[sheng].children[shi].children[qu].value
     })
+    this.getpriceinfo()
   },
   bindMultiPickerColumnChange: function (e) {
     console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
@@ -148,7 +198,6 @@ Page({
         break;
       }
     }
-    console.log(shi);
     return [shi, qu];
 
   },

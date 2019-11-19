@@ -1,5 +1,6 @@
 {
   "pages": [
+   "pages/ceshi/index",
     "pages/index/index",
     "pages/assess/index",
     "pages/travel/index",
@@ -8,7 +9,9 @@
     "pages/order/index",
     "pages/denglu/index",
     "pages/orderinfs/index",
+    "pages/charge/index",
     "pages/registe/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,6 +24,16 @@
         "scope.userLocation": {
           "desc": "你的位置信息将用于小程序位置接口的效果展示"
         }
+      },
+      "tabBar": {
+        "list": [{
+          "pagePath": "pages/ceshi/index",
+          "text": "地区"
+        },
+        {
+          "pagePath": "pages/charge/index",
+          "text": "text"
+        }]
       }
 
 }

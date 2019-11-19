@@ -20,7 +20,10 @@ var config={
   evaluate_url: host + '/api/order/evaluate',
   userinfo_url: host + '/api/wechat/mini_program/userinfo',
   senduser_url: host + '/api/sendorder/senduser',
-  driverlist_url: host + '/api/driver/lists'
+  driverlist_url: host + '/api/driver/lists',
+  reglist_url: host + '/api/wechat/region/list',
+  regcomp_url: host + '/api/wechat/region/company',
+  charstan_url: host + '/api/wechat/company/charge_standard'
 }
 var header = { 'x-service-id': '1' }
 module.exports = {config, header}

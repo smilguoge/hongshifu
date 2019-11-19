@@ -1,0 +1,19 @@
+<view class="page1">
+  <view class="psty1">
+  <input class="input1" value="{{name}}" bindinput="getcompanyname" placeholder="搜索公司名称" placeholder-class="placesty" />
+    <button bindtap="searchcompany" class="btn1"></button>
+  </view>
+  <view class="psty2">
+    <view class="text1">公司名称</view>
+    <view class="text2">客服热线</view>
+  </view>
+  <view class="psty3" wx:for="{{companyinf}}">
+    <view class="text3">{{item.name}}</view>
+    <view class="text4" data-tel="{{item.telphone}}" bindtap="tel">点击拨打</view>
+  </view>
+  <view class="psty4" wx:if="{{true}}">
+    {{endtitle}}
+  </view>
+
+</view>
+

@@ -29,6 +29,36 @@ Page({
     }
 
   },
+  gocharge: function () {
+    let token = wx.getStorageSync('token');
+    let time = new Date();
+    let createTime = wx.getStorageSync('createTime');
+    if (token && !(time - createTime > 14 * 24 * 3600 * 1000)) {
+      wx.navigateTo({
+        url: '/pages/charge/index',
+      })
+    } else {
+      wx.redirectTo({
+        url: '/pages/denglu/index',
+      })
+    }
+
+  },
+  gohotline: function () {
+    let token = wx.getStorageSync('token');
+    let time = new Date();
+    let createTime = wx.getStorageSync('createTime');
+    if (token && !(time - createTime > 14 * 24 * 3600 * 1000)) {
+      wx.navigateTo({
+        url: '/pages/hotline/index',
+      })
+    } else {
+      wx.redirectTo({
+        url: '/pages/denglu/index',
+      })
+    }
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */

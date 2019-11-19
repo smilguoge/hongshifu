@@ -20,6 +20,12 @@
   <view class="my-inf2" bindtap="getorder">
     我的订单
   </view>
+  <view class="my-inf4" bindtap="gocharge">
+    收费标准
+  </view>
+  <view class="my-inf5" bindtap="gohotline">
+    客服热线
+  </view>
   <view class="my-inf3" bindtap="escprogram">
     <text class="psty4" >{{state}}</text>
   </view>

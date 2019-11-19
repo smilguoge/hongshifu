@@ -1,0 +1,34 @@
+<!--pages/charge/index.wxml-->
+<view class="page1">
+    <view class="bg1"></view>
+<view class="psty1">
+  <view class="psty2">
+    <text class="text1">所在城市</text>
+    <text class="text2">切换</text>
+  </view>
+  <view class="psty3"></view>
+</view>
+<view class="psty4">
+  <view class="psty6">
+   <view class="bor1"><view class="psty5"><text class="text3">{{}}地区的价格表</text></view></view>
+  </view>
+  <view class="psty7"><view class="psty71">微信叫代驾只需<text class="text4">{{18}}</text>元</view></view>
+  <view class="psty8"><text class="bor2">含5.5km(07:00-21:59)</text></view>
+  <view class="psty8">含3.5km(22:00-06:59)</view>
+  <view class="psty9">超出每<text class="col1">0.8</text>km加收2元，不足0.8km按照0.8km计算</view>
+  <view class="psty10"><text class="text5">1.</text>代驾出区外  <text class="text5">2.</text>区外代驾到区内  <text class="text5">3.</text>区外代驾区外超过6公里，系统自动增收20％的返程费。</view>
+  <view class="psty11"><view class="psty11_1">（起点或目的地在区外，超过6公里才收取）</view></view>
+  <view  class="psty12">
+    <view class="text7">等待时间：</view><view class="text6">10分钟免费，超过1分钟1元 不满1分钟按1分钟计算</view>
+  </view>
+  <view class="psty13">超过6公里加收15%返程费，客服热线：0592-5555720</view>
+
+</view>
+
+
+
+
+
+
+
+</view>

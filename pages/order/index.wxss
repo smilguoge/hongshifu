@@ -1,4 +1,7 @@
 /* pages/order2/index.wxss */
+page{
+  background-color: #f2f2f2;
+}
 .order-inf{
   margin: 15rpx 20rpx;
   background-color: #fff;

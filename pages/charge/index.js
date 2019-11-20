@@ -13,8 +13,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    address:'福建厦门',
     thisSheng: 0,
-    multiIndex: [0, 0, 0]
+    multiIndex: [0, 0, 0],
+    iscontentture: true
   },
 
   /**
@@ -51,11 +53,21 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res) {
-        console.log(res)
         if (res.data.code == 200) {
           console.log(res)
+          console.log(res.data.data.chargeStandard[0].standard[0])
+          console.log(res.data.data.chargeStandard[0].standard)
+          const data = res.data.data.chargeStandard[0].standard
+          console.log(data)
+          that.setData({
+            iscontentture:true, 
+            pricedata: data        
+          })
 
         } else if (res.data.code == 422) {
+          that.setData({
+            iscontentture: false
+          })
           console.log('没有开通')
         } else {
 
@@ -66,65 +78,92 @@ Page({
   },
   onLoad: function (options) {
     const that = this
-    wx.getLocation({
-      type: 'gcj02',
-      success: function (res) {
-        that.getDistrict(res.latitude, res.longitude)
-      }
-    })
     wx.request({
       url: wx.getStorageSync('config').reglist_url,
       header: wx.getStorageSync('header'),
       success(res) {
+        console.log(res.data.data)
         that.setData({
           ssl: res.data.data
         })
         that.getlist()
         console.log(res.data.data)
+        wx.getLocation({
+           type: 'gcj02',
+          success: function (res) {
+            that.getDistrict(res.latitude, res.longitude)
+            console.log(res.longitude)
+            console.log('金纬度')
+          }
+        })
       }
     })
+
   },
   getDistrict(latitude, longitude) {
-    const that = this
-    const ssls = this.data.ssl
+    const that = this;
+    var data = this.data.ssl;
     wx.request({
       url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=${keys}`,
       header: {
         'Content-Type': 'application/json'
       },
-      success(res) {
-        const data = that.data.ssl
+      success(res) {   
+        console.log('that.data.multiArray')     
         const city = res.data.result.ad_info.name.substring(3).split(',')
-        const sheng = city[0]
-        const shi = city[1]
-        const qu = city[2]
-        let shengcode = data.findIndex(function (item) {
-          return item.label == sheng;
+        let citystring = city[1] + city[2]
+        console.log(that.data.ssl)
+        let shengcode = that.data.ssl.findIndex(function (item) {
+          return item.label == city[0];
         })
-        let shicode = data[shengcode].children.findIndex(function (item) {
-          return item.label == shi;
+
+        let shicode = that.data.ssl[shengcode].children.findIndex(function (item) {
+          return item.label == city[1];
         })
-        let qucode = data[shengcode].children[shicode].children.findIndex(function (item) {
-          return item.label == qu;
+
+        let qucode = that.data.ssl[shengcode].children[shicode].children.findIndex(function (item) {
+          return item.label == city[2];
         })
+     
+
         let multiArrayy1 = 'multiArray[' + 1 + ']', multiArrayy2 = 'multiArray[' + 2 + ']';
-        // console.log(data[shengcode].label)
-        // console.log(data[shengcode].children)
-        // console.log(data[shengcode].children[shicode].children)
-        // console.log(shengcode, shicode, qucode)
         var shiarray = [], quarray = [];
-        for (let ele of data[shengcode].children.values()) {
+
+        console.log(data[shengcode].children[shicode].children)
+        console.log('shiarray')
+        console.log(data[shengcode].children)
+        for (let ele of data[shengcode].children){
+          console.log(ele)
+          console.log('1133')
           shiarray.push(ele.label)
+          console.log(ele.label)
         }
-        for (let ele of data[shengcode].children[shicode].children.values()) {
+        for (let ele of data[shengcode].children[shicode].children) {
+          console.log('111')
           quarray.push(ele.label)
         }
+
+
+        // for (let ele of data[shengcode].children.values()) {
+        //   console.log('3333')
+        //   shiarray.push(ele.label)
+        // }
+        // console.log(shiarray)
+   
+
+        // console.log('222')
+        // for (let ele of data[shengcode].children[shicode].children.values()) {
+        //   console.log('111')
+        //   quarray.push(ele.label)
+        // }
         that.setData({
           code: res.data.result.ad_info.adcode,
           [multiArrayy1]: shiarray,
           [multiArrayy2]: quarray,
           multiIndex: [shengcode, shicode, qucode],
-          thisSheng: shengcode
+          thisSheng: shengcode,
+          address: res.data.result.address,
+          addressqu: citystring
         })
         that.getpriceinfo()
       }
@@ -132,12 +171,13 @@ Page({
 
   },
   bindMultiPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     let [sheng, shi, qu] = e.detail.value
-    // console.log(this.data.ssl[sheng].children[shi].children[qu].value)
+    let data = this.data.ssl[sheng].children[shi]
+    let citystring = data.label + data.children[qu].label
     this.setData({
       multiIndex: e.detail.value,
-      code: this.data.ssl[sheng].children[shi].children[qu].value
+      code: data.children[qu].value,
+      addressqu: citystring
     })
     this.getpriceinfo()
   },

@@ -1,4 +1,7 @@
 /* pages/order/index.wxss */
+page{
+  background-color: #f2f2f2;
+}
 .order-page{
   font-size: 28rpx;
   color: #666;
@@ -98,7 +101,7 @@ background-size: 40rpx;
 .col1{color: #ff9902;}
 .order-pa3{
   padding-bottom: 25rpx;
-  margin-bottom: 165rpx;
+  margin-bottom: 25rpx;
 }
 .order-pa4{
   position: fixed;

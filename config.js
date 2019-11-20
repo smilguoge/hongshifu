@@ -22,7 +22,8 @@ var config={
   senduser_url: host + '/api/sendorder/senduser',
   driverlist_url: host + '/api/driver/lists',
   reglist_url: host + '/api/wechat/region/list',
-  regcomp_url: host + '/api/wechat/region/company',
+  hotline_url: host + '/api/wechat/company/hotline',
+  reglist_url: host + '/api/wechat/region/list',
   charstan_url: host + '/api/wechat/company/charge_standard'
 }
 var header = { 'x-service-id': '1' }

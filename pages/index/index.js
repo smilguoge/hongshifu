@@ -22,6 +22,8 @@ Page({
     latitude: '',
     myLatitude: 0.0,
     myLongitude: 0.0,
+    btn1show:true,
+    btn2show:true
 
   },
   currentTab: function (e) {
@@ -83,7 +85,7 @@ Page({
   refreshloction(){
     this.mapCtx.moveToLocation();
   },
-  subdrive1: function () {
+  subdrive1: function (e) {
     const that = this;
     console.log(that.data.token)
     console.log('that.data.token')
@@ -98,6 +100,10 @@ Page({
       })
 
     }else{
+      this.setData({
+        btn1show: false
+      })
+      const that=this
       wx.request({
         url: wx.getStorageSync('config').order_url,
         data: {
@@ -112,11 +118,17 @@ Page({
         header: wx.getStorageSync('header'),
         method: "post",
         success(res) {
+          that.setData({
+            btn1show: true
+          })
           wx.navigateTo({
             url: '/pages/order/index',
           })
         },
         fail() {
+          that.setData({
+            btn1show: true
+          })
           wx.showToast({
             title: '预约代驾失败',
             icon: 'error',
@@ -136,7 +148,13 @@ Page({
         icon: 'error',
         duration: 2000
       })
+      that.setData({
+        btn2show: true
+      })
     } else {
+      that.setData({
+        btn2show: false
+      })
       wx.request({
         url: wx.getStorageSync('config').isregister_url,
         data: {
@@ -145,6 +163,9 @@ Page({
         },
         header: wx.getStorageSync('header'),
         success(res) {
+          that.setData({
+            btn2show: true
+          })
           if (res.data.code === 200){
             wx.request({
               url: wx.getStorageSync('config').calling_url,
@@ -183,6 +204,17 @@ Page({
             })
 
           }
+        },
+        fail(){
+          that.setData({
+            btn2show: true
+          })
+          wx.showToast({
+            title: '预约代驾失败',
+            icon: 'error',
+            duration: 2500
+          })
+          
         }
 
       })

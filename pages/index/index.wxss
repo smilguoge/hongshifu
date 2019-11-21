@@ -24,6 +24,7 @@ input{height: 3.5em;font-size: 28rpx;}
   border-radius: 20px;
   line-height: 3.2;
 }
+.active{background-color: #bbb;}
 .my-icon{
   position:fixed;
   top:30rpx;

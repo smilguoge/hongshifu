@@ -31,14 +31,14 @@
     <view class="appoint-cont2">
       <view class="psty3"><input placeholder="请输入起始地址" value="{{staraddr}}" bindtap="getLocation"></input></view>
     </view>
-    <view class="btn1"  bindtap="subdrive1">预约代驾</view>
+    <view class="btn1 {{btn1show ? '': 'active'}}"  bindtap="subdrive1">预约代驾</view>
  </view>
 <view class="appoint-cont3" hidden="{{currentindex===0}}">
     <view class="appoint-cont2">
       <view class="psty4"><input placeholder="请输入起始地址" value="{{staraddr}}" bindtap="getLocation"></input></view>
       <view class="psty6"><input placeholder="请输入联系人联系方式" value="{{tel}}" bindinput="checktel"></input></view>
     </view>
-    <view class="btn1" bindtap="subdrive2">预约代叫</view>
+    <view class="btn1  {{btn2show ? '': 'active'}}" bindtap="subdrive2">预约代叫</view>
 </view>
 </view>
 <view class="my-icon" bindtap="gotomy">我的</view>

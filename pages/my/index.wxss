@@ -9,6 +9,7 @@
     font-family: SourceHanSansCN-Regular;
     color: #292b32; 
     font-size: 28rpx;
+    padding-bottom: 10rpx;
 }
 .myimg1{
   width: 750rpx;
@@ -53,10 +54,10 @@
   width: 100%;
   justify-content:space-around;
 }
-.my-inf2,.my-inf4,.my-inf5{
+.my-inf2,.my-inf4,.my-inf5,.my-inf6{
   position: relative;
   margin-right: 30rpx;
-  padding: 40rpx 30rpx 40rpx 60rpx;
+  padding: 30rpx 30rpx 30rpx 60rpx;
   border-bottom: 1px solid #f5f6f7;  
   }
 .my-inf2{
@@ -67,7 +68,7 @@
 .my-inf5{
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAYCAYAAAALQIb7AAACXklEQVRIibXWSYgVVxTG8V+0HVA0oAgORMWNxgHnAeeFijE7LSewVioKioigCE4Le+PGTbKIgmZRq5YSRFDEhRBBQVEUxAlB0EWjiTgkivPAfd7qtI/X7euCPlBVj1vvnP/9zj333Prh87I16rSFmInxGIe/cQXXcF6e3f9emHpgu7AP3VqNPUW/qv+dxl55drWtQF3agUzDMzTiIdZjDHqgf5goBmMB/sSSitIkPdhRZctxDJ+xFCfanFKefX0m6QD8hpX4S57Nr0fZkgi6hd7tgr6F/iPPVmEt5knS89+D/YhTeISxeF0X6FvoUWzAHEl6oD1YoWJyTGE5y7PDsWB2SNKhtWA/IeR5O5pLg/5X+Cs+4lAx1BCfYW2a4u/VEbyzVBqTNFTrHsxFVyyWpKPk2Z0A64MbGBY3aJC9JU5gXQlNm+PefIPrmFCJn6QjukSZAfQLJiGU8Mu4f8rY6JZs5dlETIkZPBlgK/AAZ6oCPy8Je9UCU1m70FHOBoUB9h7/1nAqW42FX49WY/+J1fi+qu91hnUvYOH61MmwTwWsVyeDgr0rYHfwc42Z9CkZuGflnmdPWo3NDsvVEPfSBbzA0Qjqi9slYW8q9yTdH2thGQZhVYBdDK/wB7ZGh+a4OctYY2x7u6PvW2yUZ01Fuzoer4HxUHzWMsOOWjhqkrRn9Johzy4VERqqQj0qqUZM3Syci6W+qDWoFqweCy3oZlFhERI+IbbFU/oDpsuzy9WxOvJ1FWwTfsfdkDAMj+szJL4/UoHmWa2O1GFlU+NzZOzswR7HI6VJnt1r0xNfANvFk9SXJLQ4AAAAAElFTkSuQmCC") no-repeat left center;
    background-size: 35rpx;
-   margin-left: 32rpx;
+   margin-left: 36rpx;
 
 }
 .my-inf4{
@@ -75,10 +76,10 @@
   background-size: 30rpx;
   margin-left: 36rpx;
 }
-.my-inf2::after,.my-inf4::after,.my-inf5::after{
+.my-inf2::after,.my-inf4::after,.my-inf5::after,.my-inf6::after{
   position: absolute;
   content: '';
-  top:60rpx;
+  top:40rpx;
   width: 30rpx;
   height: 30rpx;
   right: 0;
@@ -102,10 +103,10 @@ padding-left:50rpx;
   color: #8b8b8b;
   }
 .my-inf3{
-  background-color: transparent;
+  background-color: #fff;
 	box-shadow: 0rpx 1rpx 5rpx 0rpx rgba(0, 0, 0, 0.11);
 	border-radius: 30rpx;
-  margin:70rpx 70rpx 0;
+  margin:70rpx 70rpx 70rpx;
   text-align: center;
   padding-top: 20rpx;
   padding-bottom: 20rpx; 
@@ -113,4 +114,13 @@ padding-left:50rpx;
 .myimg3{
   width: 750rpx;
   height: 295rpx;
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+}
+.my-inf6{
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAARCAYAAADHeGwwAAABbklEQVQ4jbXUvUtcQRQF8J/JkiJ/gAQrhYAikiBYCBpsjBEEG8UmW2YLFUQIxMo/IKRUQdgm4JaSIFiIWotiIaTIhyHE0o9CC0vNhpF54flcxazrgXnD3Hn3nDf33Hl15ddvlvEcDSirDepwgt0cBiLlDnI1EjhDEzoTwnmMVkVVKlaO5wtDWHwQl3+q+9AbccGZCDy9B4EOsean6MMxevAl8+IHvMJ5Jv4Q3zFyKZovPMYquhKBl2jGR2yiEYeplGBWa+yMNMrRzCw2YldOhsbJRdLNuLGLt5hKJQ3fuij5Qnckn1Aqzkh5EPAzzs9uTXgVLTGykOykBdrjvHUHgcS/sSQQbnLw4AWmcRA76jSVtITBawi/KRVbL0XyhTX0Yg7rwYOVeJKv6M+QB2zjUYXfSDD9RwXR0JGfMR5GOEFI/ISh/6nFP1x/k9/hfeLBUVXkN+O3jMn3gqREAfs1FngSHsHkWbShvsYCe/j1F54GStZ9CKpkAAAAAElFTkSuQmCC") no-repeat left center;
+   background-size: 35rpx;
+   margin-left: 36rpx;
+
 }

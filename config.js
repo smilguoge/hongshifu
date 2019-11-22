@@ -24,7 +24,10 @@ var config={
   reglist_url: host + '/api/wechat/region/list',
   hotline_url: host + '/api/wechat/company/hotline',
   reglist_url: host + '/api/wechat/region/list',
-  charstan_url: host + '/api/wechat/company/charge_standard'
+  charstan_url: host + '/api/wechat/company/charge_standard',
+  couponli_url: host + '/api/activity/coupon/list',
+  couponde_url: host + '/api/activity/coupon/detail',
+  couponob_url: host + '/api/activity/coupon/obtain'
 }
 var header = { 'x-service-id': '1' }
 module.exports = {config, header}

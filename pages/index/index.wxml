@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view wx:if="{{isHide}}">
+<!-- <view wx:if="{{isHide}}">
     <view wx:if="{{canIUse}}" >
         <view class='header'>
             <image src='../../images/logo.png'></image>
@@ -13,9 +13,9 @@
         </button>
     </view>
     <view wx:else>请升级微信版本</view>
-</view>
+</view> -->
  
-<view wx:else class="pheight">
+<view class="pheight">
   <map id="map" longitude="{{myLongitude}}" latitude="{{myLatitude}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" controls="{{controls}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location>
   <cover-image class="img-map" src="../../images/marker1.png"></cover-image>
   <cover-view class="img-map2" bindtap="refreshloction">

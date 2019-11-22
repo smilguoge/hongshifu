@@ -11,8 +11,8 @@ var qqmapsdk = new QQMapWX({
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: false,
+    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // isHide: false,
     currentindex: 0,
     navbar: ["叫代驾", "代叫"],
     staraddr: '',
@@ -57,16 +57,16 @@ Page({
     });
 
     // 查看是否授权
-    wx.getSetting({
-      success: function (res) {
-        if (res.authSetting['scope.userInfo']) {
-        } else {
-          that.setData({
-            isHide: true
-          });
-        }
-      }
-    });
+    // wx.getSetting({
+    //   success: function (res) {
+    //     if (res.authSetting['scope.userInfo']) {
+    //     } else {
+    //       that.setData({
+    //         isHide: true
+    //       });
+    //     }
+    //   }
+    // });
     wx.getLocation({
       type: 'gcj02',
       success: function (res) {

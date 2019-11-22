@@ -59,6 +59,21 @@ Page({
     }
 
   },
+  gocoupon: function () {
+    let token = wx.getStorageSync('token');
+    let time = new Date();
+    let createTime = wx.getStorageSync('createTime');
+    if (token && !(time - createTime > 14 * 24 * 3600 * 1000)) {
+      wx.navigateTo({
+        url: '/pages/coupon/index',
+      })
+    } else {
+      wx.redirectTo({
+        url: '/pages/denglu/index',
+      })
+    }
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -73,15 +88,7 @@ Page({
          },
          header: wx.getStorageSync('header'),
         success(res) {
-           if (res.data.data.avatar_url!==''){
-             that.setData({
-               customerlogo: res.data.data.avatar_url,
-               name: res.data.data.realname,
-               tel: res.data.data.mobile,
-               state: "退出",
-               statenum: false,
-             })
-           }else{
+             console.log(wx.getStorageSync('token'))
              that.setData({
                customerlogo: app.globalData.userInfo.avatarUrl,
                name: res.data.data.realname,
@@ -89,7 +96,7 @@ Page({
                state: "退出",
                statenum: false,
              })
-           }
+          
          }
        })
 

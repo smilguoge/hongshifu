@@ -10,6 +10,7 @@
     "pages/orderinfs/index",
     "pages/charge/index",
     "pages/hotline/index",
+    "pages/coupon/index",
     "pages/registe/index"
 
   ],

@@ -1,0 +1,14 @@
+<!--pages/coupon/index.wxml-->
+<view>
+<image src="{{bgimages}}" class="bgimg" mode="widthFix"></image>
+<view class="psty1">
+  <view class="psty2">
+  <input placeholder="请输入手机号" value="{{tel}}" bindinput="checktel"></input>
+   <button bindtap="getcoupon" class="btn1">领取</button>
+  </view>
+  <view class="psty3"><view class="text1">活动规则</view></view>
+  <view class="psty4">{{themecontent}}</view>
+  <view class="psty5">活动时间：{{begintime}}-{{endtime}}</view>
+</view>
+
+</view>

@@ -200,6 +200,11 @@ Page({
       smsvcode: e.detail.value
     })
   },
+  goagreement:function(){
+    wx.redirectTo({
+      url: '/pages/agreement/index',
+    })
+  },
   getcheck: function (e) {
     let that=this;
     var num = 60,timer;
@@ -237,7 +242,7 @@ Page({
                })
 
              }
-           }, 1000)
+           }, 800)
           }
         })
     }

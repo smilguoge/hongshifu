@@ -11,7 +11,8 @@
     "pages/charge/index",
     "pages/hotline/index",
     "pages/coupon/index",
-    "pages/registe/index"
+    "pages/registe/index",
+    "pages/agreement/index"
 
   ],
   "window": {

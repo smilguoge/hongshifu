@@ -29,6 +29,9 @@
   <view class="my-inf6" bindtap="gocoupon">
     优惠码
   </view>
+ <view class="my-inf7" bindtap="goagreement">
+    代驾协议
+  </view>
   <view class="my-inf3" bindtap="escprogram">
     <text class="psty4" >{{state}}</text>
   </view>

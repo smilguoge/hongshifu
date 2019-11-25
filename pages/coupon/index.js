@@ -24,6 +24,7 @@ Page({
             lat: res.latitude
           },
           success(res){
+            console.log(res)
             if(res.data.code==200){
               that.setData({
                 bgimages: res.data.data.bg_url,

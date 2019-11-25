@@ -39,7 +39,13 @@ App({
          data:{
            token: token.access_token
          },
-         success(){
+         success(res){
+           if(res.data.code==200){
+             let token = res.data.data;
+             wx.setStorageSync('token', token);//存储token
+             let createTime = new Date();
+             wx.setStorageSync('createTime', createTime);
+           }
          }
        })
 

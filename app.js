@@ -20,9 +20,9 @@ App({
                let session = res.data.data;
                wx.setStorageSync('session', session);//信息存储openid和session
              },
-             fail() {
+             fail(res) {
                wx.showToast({
-                 title: '退出重新登录!',
+                 title: '请重新进入!',
                 icon: 'error',
                  duration: 2000
                })
@@ -50,7 +50,7 @@ App({
        })
 
      }else{
-       console.log("登录了，token有效")
+       console.log("app中登录了，token有效")
      }
 
 

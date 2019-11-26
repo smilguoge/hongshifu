@@ -1,0 +1,20 @@
+/* pages/agreement/index.wxss */
+.psty1{
+  padding: 30rpx;
+  font-size: 30rpx;
+}
+.psty3{
+  font-size: 36rpx;
+  text-align:center;
+  font-weight: bold;
+    padding-top: 25rpx;
+    padding-bottom: 25rx;
+  }
+  .psty2,.psty4,.psty5{
+    text-indent: 32rpx;
+    padding-top: 25rpx;
+    padding-bottom: 25rx;
+  }
+  .psty4{
+    text-align: center;
+  }

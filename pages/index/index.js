@@ -39,8 +39,7 @@ Page({
       url: '/pages/my/index' // 跳转到新页面
     })
   },
-  onShow:function(){  
-    console.log(wx.getStorageSync('session').openid)
+  onShow: function () {
 
   },
   onLoad: function () {
@@ -56,26 +55,22 @@ Page({
       key: 'YGSBZ-QANC4-M2YUA-X2HI3-5AT6Q-JEBIJ' //XXXX-XXXX-XXXX-XXXX
     });
 
-    // 查看是否授权
-    // wx.getSetting({
-    //   success: function (res) {
-    //     if (res.authSetting['scope.userInfo']) {
-    //     } else {
-    //       that.setData({
-    //         isHide: true
-    //       });
-    //     }
-    //   }
-    // });
     wx.getLocation({
       type: 'gcj02',
       success: function (res) {
         that.setData({
           myLatitude: res.latitude,
-          myLongitude: res.longitude
+          myLongitude: res.longitude,
+           longitude: res.longitude,
+          latitude: res.latitude
         });
+        that.getPoiList(res.longitude, res.latitude)
+        that.getdriverlist(res.longitude, res.latitude)
+        console.log("index中load经纬度")
       }
     })
+
+
     that.setData({
       openid: wx.getStorageSync('session').openid,
       token: wx.getStorageSync('token').access_token
@@ -195,10 +190,15 @@ Page({
               }
             })
           } else if(res.data.code === 422) {
+            console.log(res.data.code)
             wx.navigateTo({
               url: '/pages/registe/index',
             })
           } else if (res.data.code === 401) {
+            console.log(that.data.staraddr)
+            console.log(that.data.myLongitude)
+            console.log(that.data.myLatitude)
+            console.log(that.data.token)
             wx.navigateTo({
               url: '/pages/denglu/index',
             })
@@ -256,7 +256,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getLngLat()
+    // this.getLngLat()
   },
   /**
    * 获取中间点的经纬度，并mark出来
@@ -307,6 +307,7 @@ Page({
           longitude: res.longitude,
           latitude: res.latitude
         })
+        console.log(res)
         that.getPoiList(res.longitude, res.latitude)
         that.getdriverlist(res.longitude, res.latitude)
 
@@ -332,6 +333,7 @@ Page({
       get_poi: 1,
       poi_options: 'policy=2;radius=3000;page_size=2;page_index=1',
       success: function (res) {
+        console.log("地址解析" + res)
         /**
          * 详细数据从这儿拿....
          */

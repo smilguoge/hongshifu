@@ -61,6 +61,8 @@ Page({
   getPhoneNumber: function (e) {
     var that = this
     let tel = wx.getStorageSync('phone')
+    console.log("是否获取保存tel")
+    console.log(tel)
     if (!tel){
       wx.request({
         url: wx.getStorageSync('config').userinfo_url,
@@ -71,69 +73,81 @@ Page({
         },
         header: wx.getStorageSync('header'),
         success(res) {
+          if(res.data.code==200){
           wx.setStorageSync('phone', res.data.data.phoneNumber);
-          wx.request({
-            url: wx.getStorageSync('config').senduser_url,
-            data: {
-              openid: wx.getStorageSync('session').openid,
-              platform: 'mini_program,',
-              phone: res.data.data.phoneNumber,
-              service_id: '1'
-            },
-            method: 'post',
-            header: wx.getStorageSync('header'),
-            success(res) {
-              wx.request({
-                url: wx.getStorageSync('config').quick_login_url,
-                data: {
-                  openid: wx.getStorageSync('session').openid,
-                  platform: 'mini_program,'
-                },
-                method: 'post',
-                header: wx.getStorageSync('header'),
-                success(res) {
+            wx.request({
+              url: wx.getStorageSync('config').login_url,
+              data: {
+                openid: wx.getStorageSync('session').openid,
+                platform: 'mini_program',
+                mobile: res.data.data.phoneNumber,
+                smsvcode:'2456'
+              },
+              method: 'post',
+              header: wx.getStorageSync('header'),
+              success(res) {
+                if (res.data.code == 200) {
                   wx.setStorageSync('token', res.data.data);//存储token
                   let createTime = new Date();
                   wx.setStorageSync('createTime', createTime);
                   wx.redirectTo({
                     url: '/pages/index/index',
                   })
+                } else {
+                  wx.showToast({
+                    title: '登录不成功！',
+                    icon: 'error',
+                    duration: 2000
+                  })
+
                 }
-              })
+              }
+            })
+          }else{
+            wx.showToast({
+              title: '重新允许获取电话！',
+              icon: 'error',
+              duration: 2000
+            })
 
-
-            }
-          })
+          }
         }
       })
 
     }else{
       wx.request({
-        url: wx.getStorageSync('config').quick_login_url,
+        url: wx.getStorageSync('config').login_url,
         data: {
           openid: wx.getStorageSync('session').openid,
-          platform: 'mini_program,'
+          platform: 'mini_program',
+          mobile: tel,
+          smsvcode: '2456'
         },
         method: 'post',
         header: wx.getStorageSync('header'),
         success(res) {
-          wx.setStorageSync('token', res.data.data);//存储token
-          let createTime = new Date();
-          wx.setStorageSync('createTime', createTime);
-          wx.redirectTo({
-            url: '/pages/index/index',
-          })
+          if (res.data.code == 200) {
+            wx.setStorageSync('token', res.data.data);//存储token
+            let createTime = new Date();
+            wx.setStorageSync('createTime', createTime);
+            wx.redirectTo({
+              url: '/pages/index/index',
+            })
+          } else {
+            wx.showToast({
+              title: '登录不成功！',
+              icon: 'error',
+              duration: 2000
+            })
+
+          }
         }
       })
 
 
+
+
     }
-
-
-
-
-
-
   },
   putlogin: function () {
     const that=this;
@@ -150,8 +164,8 @@ Page({
     header: wx.getStorageSync('header'),
     success(res){
       if (res.data.code == 200){
-        let token = res.data.data;
-        wx.setStorageSync('token', token);//存储token
+        // let token = res.data.data;
+        wx.setStorageSync('token', res.data.data);//存储token
         let createTime = new Date();
         wx.setStorageSync('createTime', createTime);
         wx.redirectTo({

@@ -26,8 +26,11 @@ Page({
           success(res){
             console.log(res)
             if(res.data.code==200){
+              console.log(res.data.data.bg_url)
+              console.log(res.data.data.start_at)
               that.setData({
                 bgimages: res.data.data.bg_url,
+
                 begintime: res.data.data.start_at,
                 endtime: res.data.data.end_at,
                 name: res.data.data.rule_name, 

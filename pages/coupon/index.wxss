@@ -1,4 +1,5 @@
 /* pages/coupon/index.wxss */
+page{background-color: #ccc;}
 .bgimg{
   width: 100%;
   height: 100%;

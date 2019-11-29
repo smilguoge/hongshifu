@@ -26,11 +26,11 @@
   <view class="my-inf5" bindtap="gohotline">
     客服热线
   </view>
-  <view class="my-inf6" bindtap="gocoupon">
+  <view class="my-inf6" bindtap="gocoupon" hidden="{{ishidden}}">
     优惠码
   </view>
  <view class="my-inf7" bindtap="goagreement">
-    代驾协议
+    代驾服务协议
   </view>
   <view class="my-inf3" bindtap="escprogram">
     <text class="psty4" >{{state}}</text>

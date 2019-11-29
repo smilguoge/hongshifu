@@ -1,5 +1,11 @@
 // pages/my/index.js
 const app = getApp()
+var QQMapWX = require('../libs/qqmap-wx-jssdk.js');
+
+// 实例化API核心类
+var qqmapsdk = new QQMapWX({
+  key: 'YGSBZ-QANC4-M2YUA-X2HI3-5AT6Q-JEBIJ' // 必填
+});
 Page({
 
   /**
@@ -86,6 +92,34 @@ Page({
   onLoad: function (options) {
     const that = this;
     const token = wx.getStorageSync('token');
+    wx.getLocation({
+      type: 'gcj02',
+      success: function (res) {
+        // that.setData({
+        //   longitude: res.longitude,
+        //   latitude: res.latitude
+        // });
+        wx.request({
+          url: wx.getStorageSync('config').couponli_url,
+          data: {
+            lng: res.longitude,
+            lat: res.latitude
+      },
+          header: wx.getStorageSync('header'),
+          success(res) {
+            console.log(res)
+            if (res.data.code == 422){
+              console.log("ddd")
+              that.setData({
+                ishidden:true
+              })
+              console.log(that.data.ishidden)
+            }
+          }
+        })
+
+      }
+    })
     if (token){
        wx.request({
          url: wx.getStorageSync('config').info_url,

@@ -30,7 +30,7 @@ bindinput="inputvalue" />
 </view>
 <button class="de-btn1" bindtap="getcheck" disabled="{{disable}}" hover-class="none">{{codename}}</button>
 </view>
-<view class="psty1" bindtap="goagreement">《代驾协议》</view>
+<view class="psty1" bindtap="goagreement">《代驾服务协议》</view>
 <button class="de-btn" bindtap="putlogin">登录</button>
 <button class="de-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快速登录</button>
 <!-- <button class="de-btn" bindtap="gettel">微信快速登录</button> -->

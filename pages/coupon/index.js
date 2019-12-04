@@ -24,13 +24,9 @@ Page({
             lat: res.latitude
           },
           success(res){
-            console.log(res)
             if(res.data.code==200){
-              console.log(res.data.data.bg_url)
-              console.log(res.data.data.start_at)
               that.setData({
                 bgimages: res.data.data.bg_url,
-
                 begintime: res.data.data.start_at,
                 endtime: res.data.data.end_at,
                 name: res.data.data.rule_name, 
@@ -38,12 +34,11 @@ Page({
                 activeid: res.data.data.id
               })
 
-            }else if(res.data.code==500){
-
             }else{
+              let mess = res.data.message
               wx.showToast({
-                title: '请重新再进入！',
-                icon: 'error',
+                title: mess,
+                icon: 'none',
                 duration: 2000
               })
             }
@@ -76,9 +71,6 @@ Page({
           },
           method:"post",
           success(res){
-            console.log('that.data.activeid')
-            console.log(that.data.activeid)
-            console.log(that.data.tel)
             if(res.data.code==200){
               wx.showToast({
                 title: '领取成功！',
@@ -95,9 +87,10 @@ Page({
                 duration: 2000
               })
             }else{
+              let mess = res.data.message
               wx.showToast({
-                title: '领取失败！',
-                icon: 'error',
+                title: mess,
+                icon: 'none',
                 duration: 2000
               })
             }

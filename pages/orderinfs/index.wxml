@@ -54,12 +54,14 @@
   <view class="messgebcont" hidden="{{isordershow}}" >
   <view class="select-box">
     <view class="select-title">取消订单</view>
-    <view class="select" catchtap="selectTap"><text class="select1">取消原因</text><text class="select2">{{content}}</text></view>
-     <view class='option_box' style='height:{{isshow?(orderitems.length>5?300:orderitems.length*60):0}}rpx;'>
+    <view class="select selectbox" catchtap="selectTap"><text class="select1">取消原因</text><text class="select2">{{content}}</text>
+     <view class='option_box' hidden="{{!isshow}}" style='height:{{isshow?(orderitems.length*62):0}}rpx;'>
       <view class='option' style='{{index==orderitems.length-1&&"border:0;"}}' wx:for='{{orderitems}}' wx:key='this' data-index='{{index}}' catchtap='optionTap' data-value="{{item.value}}">{{item.value}}</view>
     </view>
+    </view>
+
     <view class="reasonsty">
-      <textarea placeholder="还想说点啥？写在这里吧！" >{{reason}}</textarea>
+      <textarea placeholder="还想说点啥？写在这里吧！" wx:if="{{!isshow}}">{{reason}}</textarea>
     </view>
     <view class="cancle-btn" bindtap="putmessage">确定</view>
   </view>

@@ -16,7 +16,7 @@ Page({
     tel:'',
     money:'0',
     integral:'0',
-    customerlogo:'',
+    customerlogo: '../../images/customlogo.png',
     state:'登录',
     statenum:true,
   },
@@ -107,13 +107,10 @@ Page({
       },
           header: wx.getStorageSync('header'),
           success(res) {
-            console.log(res)
-            if (res.data.code == 422){
-              console.log("ddd")
+            if (res.data.code !== 200){
               that.setData({
                 ishidden:true
               })
-              console.log(that.data.ishidden)
             }
           }
         })
@@ -128,14 +125,23 @@ Page({
          },
          header: wx.getStorageSync('header'),
         success(res) {
-             console.log(wx.getStorageSync('token'))
-             that.setData({
-               customerlogo: app.globalData.userInfo.avatarUrl,
-               name: res.data.data.realname,
-               tel: res.data.data.mobile,
-               state: "退出",
-               statenum: false,
-             })
+          if(res.data.code==200){
+            that.setData({
+              customerlogo: app.globalData.userInfo.avatarUrl,
+              name: res.data.data.realname,
+              tel: res.data.data.mobile,
+              state: "退出",
+              statenum: false,
+            })
+
+          }else{
+            let mess = res.data.message
+            wx.showToast({
+              title: mess,
+              icon: 'none',
+              duration: 2500
+            })
+          }
           
          }
        })
@@ -166,19 +172,28 @@ Page({
          },
          header: wx.getStorageSync('header'),
          success(res) {
-           wx.removeStorageSync('token')
-           that.setData({
-            state: '登录',
-            statenum: false,
-            name: '',
-            tel: '',
-            money: '0',
-            integral: '0',
-            customerlogo: '../../images/customlogo.png',
-           })
-           wx.redirectTo({
-            url: '/pages/index/index',
-           })
+           if(res.data.code==200){
+             wx.removeStorageSync('token')
+             that.setData({
+               state: '登录',
+               statenum: false,
+               name: '',
+               tel: '',
+               money: '0',
+               integral: '0',
+               customerlogo: '../../images/customlogo.png',
+             })
+             wx.redirectTo({
+               url: '/pages/index/index',
+             })
+           }else{
+             let mess = res.data.message
+             wx.showToast({
+               title: mess,
+               icon: 'none',
+               duration: 2500
+             }) 
+           }
          }
       })
 

@@ -5,9 +5,9 @@ const app = getApp()
 var QQMapWX = require('../libs/qqmap-wx-jssdk.js');
 // 实例化API核心类
 var qqmapsdk = new QQMapWX({
-  key: 'YGSBZ-QANC4-M2YUA-X2HI3-5AT6Q-JEBIJ' // 必填
+  key: 'KNQBZ-4G3KX-SMP4L-7DT3Q-G6FKS-3CF6G' // 必填
 });
-let keys = 'YGSBZ-QANC4-M2YUA-X2HI3-5AT6Q-JEBIJ'
+let keys = 'KNQBZ-4G3KX-SMP4L-7DT3Q-G6FKS-3CF6G'
 Page({
   /**
    * 页面的初始数据
@@ -55,21 +55,22 @@ Page({
       success(res) {
         if (res.data.code == 200) {
           console.log(res)
-          console.log(res.data.data.chargeStandard[0].standard[0])
-          console.log(res.data.data.chargeStandard[0].standard)
           const data = res.data.data.chargeStandard[0].standard
-          console.log(data)
           that.setData({
             iscontentture:true, 
             pricedata: data        
           })
 
-        } else if (res.data.code == 422) {
+        } else {
           that.setData({
             iscontentture: false
           })
-          console.log('没有开通')
-        } else {
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2000
+          })
 
         }
 
@@ -82,20 +83,25 @@ Page({
       url: wx.getStorageSync('config').reglist_url,
       header: wx.getStorageSync('header'),
       success(res) {
-        console.log(res.data.data)
-        that.setData({
-          ssl: res.data.data
-        })
-        that.getlist()
-        console.log(res.data.data)
-        wx.getLocation({
-           type: 'gcj02',
-          success: function (res) {
-            that.getDistrict(res.latitude, res.longitude)
-            console.log(res.longitude)
-            console.log('金纬度')
-          }
-        })
+        if(res.data.code==200){
+          that.setData({
+            ssl: res.data.data
+          })
+          that.getlist()
+          wx.getLocation({
+            type: 'gcj02',
+            success: function (res) {
+              that.getDistrict(res.latitude, res.longitude)
+            }
+          })
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       }
     })
 
@@ -108,11 +114,9 @@ Page({
       header: {
         'Content-Type': 'application/json'
       },
-      success(res) {   
-        console.log('that.data.multiArray')     
+      success(res) {      
         const city = res.data.result.ad_info.name.substring(3).split(',')
         let citystring = city[1] + city[2]
-        console.log(that.data.ssl)
         let shengcode = that.data.ssl.findIndex(function (item) {
           return item.label == city[0];
         })
@@ -124,38 +128,14 @@ Page({
         let qucode = that.data.ssl[shengcode].children[shicode].children.findIndex(function (item) {
           return item.label == city[2];
         })
-     
-
         let multiArrayy1 = 'multiArray[' + 1 + ']', multiArrayy2 = 'multiArray[' + 2 + ']';
         var shiarray = [], quarray = [];
-
-        console.log(data[shengcode].children[shicode].children)
-        console.log('shiarray')
-        console.log(data[shengcode].children)
         for (let ele of data[shengcode].children){
-          console.log(ele)
-          console.log('1133')
           shiarray.push(ele.label)
-          console.log(ele.label)
         }
         for (let ele of data[shengcode].children[shicode].children) {
-          console.log('111')
           quarray.push(ele.label)
         }
-
-
-        // for (let ele of data[shengcode].children.values()) {
-        //   console.log('3333')
-        //   shiarray.push(ele.label)
-        // }
-        // console.log(shiarray)
-   
-
-        // console.log('222')
-        // for (let ele of data[shengcode].children[shicode].children.values()) {
-        //   console.log('111')
-        //   quarray.push(ele.label)
-        // }
         that.setData({
           code: res.data.result.ad_info.adcode,
           [multiArrayy1]: shiarray,
@@ -166,6 +146,13 @@ Page({
           addressqu: citystring
         })
         that.getpriceinfo()
+      },
+      fail(){
+        wx.showToast({
+          title: "退出重新获取",
+          icon: 'none',
+          duration: 2000
+        })
       }
     })
 
@@ -182,7 +169,6 @@ Page({
     this.getpriceinfo()
   },
   bindMultiPickerColumnChange: function (e) {
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
@@ -205,16 +191,14 @@ Page({
       case 1:
         //此处是拖动第二栏的时候处理
         var row = this.getCity(this.data.thisSheng, e.detail.value);
-        console.log(row);
         data.multiArray[2] = row[1];
         data.multiIndex[2] = 0;
-        console.log(data.multiIndex);
+
         break;
     }
     this.setData(data);
   },
   getCity: function (x, y = 999, z = 999) {
-    console.log("xy", x, y);
     var ssls = this.data.ssl;
     var shi = [];
     var qu = [];

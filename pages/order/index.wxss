@@ -99,3 +99,6 @@ page{
 	border-radius: 10rpx;
   padding: 10rpx 55rpx;
 }
+.pcont5{
+  text-align: center;padding-top: 30rpx;
+}

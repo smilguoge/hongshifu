@@ -193,18 +193,26 @@ background-color: rgba(0, 0, 0, .4)
 }
 .option_box{
   position: absolute;
-  width:calc(100% - 100rpx);
+  width:100%;
   background-color: #faf8f8;
   height: 0;
-  overflow-y: auto;
-  z-index: 3
+  top: 50rpx;
+  left: 0rpx;
+  z-index: 4;
 }
 .reasonsty{
   margin-top: 50rpx;
   margin-bottom: 20rpx;
+  position: relative;
+  z-index: 1;
 }
 .reasonsty textarea{
   width: 100%;
   height: 200rpx;
-  z-index: 2
+  position: relative;
+  z-index: 0;
+}
+.selectbox{
+  position: relative;
+  z-index: 9;
 }

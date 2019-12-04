@@ -61,8 +61,7 @@ Page({
   getPhoneNumber: function (e) {
     var that = this
     let tel = wx.getStorageSync('phone')
-    console.log("是否获取保存tel")
-    console.log(tel)
+    console.log(tel) 
     if (!tel){
       wx.request({
         url: wx.getStorageSync('config').userinfo_url,
@@ -73,6 +72,9 @@ Page({
         },
         header: wx.getStorageSync('header'),
         success(res) {
+          console.log(res)
+          console.log("获取电话成功")
+          console.log(wx.getStorageSync('session').openid)
           if(res.data.code==200){
           wx.setStorageSync('phone', res.data.data.phoneNumber);
             wx.request({
@@ -86,6 +88,10 @@ Page({
               method: 'post',
               header: wx.getStorageSync('header'),
               success(res) {
+                console.log()
+                console.log(res.data.data)
+                console.log(res.data.code)
+                console.log("获取token")
                 if (res.data.code == 200) {
                   wx.setStorageSync('token', res.data.data);//存储token
                   let createTime = new Date();
@@ -94,9 +100,10 @@ Page({
                     url: '/pages/index/index',
                   })
                 } else {
+                  let mess = res.data.message
                   wx.showToast({
-                    title: '登录不成功！',
-                    icon: 'error',
+                    title: mess,
+                    icon: 'none',
                     duration: 2000
                   })
 
@@ -104,9 +111,10 @@ Page({
               }
             })
           }else{
+            let mess = res.data.message
             wx.showToast({
-              title: '重新允许获取电话！',
-              icon: 'error',
+              title: mess,
+              icon: 'none',
               duration: 2000
             })
 
@@ -126,6 +134,7 @@ Page({
         method: 'post',
         header: wx.getStorageSync('header'),
         success(res) {
+          console.log(res)
           if (res.data.code == 200) {
             wx.setStorageSync('token', res.data.data);//存储token
             let createTime = new Date();
@@ -134,9 +143,10 @@ Page({
               url: '/pages/index/index',
             })
           } else {
+            let mess = res.data.message
             wx.showToast({
-              title: '登录不成功！',
-              icon: 'error',
+              title: mess,
+              icon: 'none',
               duration: 2000
             })
 
@@ -163,6 +173,7 @@ Page({
     method: "post",
     header: wx.getStorageSync('header'),
     success(res){
+      console.log()
       if (res.data.code == 200){
         // let token = res.data.data;
         wx.setStorageSync('token', res.data.data);//存储token
@@ -178,8 +189,9 @@ Page({
           duration: 2000
         })
       }else{
+        let message = res.data.message    
         wx.showToast({
-          title: '请重新获取登录！',
+          title: message,
           icon: 'error',
           duration: 2000
         })
@@ -197,7 +209,7 @@ Page({
 
   }else{
       wx.showToast({
-        title: '验证码错误!',
+        title: '验证码有误!',
         icon: 'error',
         duration: 2000
       })
@@ -231,6 +243,11 @@ Page({
     } else{
       that.setData({
         codenum: num
+      })
+      wx.showToast({
+        title: '获取验证码',
+        icon: 'loading',
+        duration: 6000
       })
        wx.request({
           url: wx.getStorageSync('config').send_url,
@@ -266,6 +283,45 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const that=this
+    let openid = wx.getStorageSync('session').openid
+    console.log(openid)
+    if (typeof openid == "undefined" || openid == null || openid == ""){
+      wx.login({
+        success: res => {
+          let code = res.code;
+          wx.request({
+            url: wx.getStorageSync('config').openid_url,
+            data: { code: code },
+            header: wx.getStorageSync('header'),
+            success(res) {
+              let session = res.data.data;
+              console.log("登录页的openid")
+              console.log(session)
+              wx.setStorageSync('session', session);//信息存储openid和session
+              that.setData({
+                openid: session.openid
+              })
+              console.log("页面设置openid")
+            },
+            fail(res) {
+              console.log(res)
+              wx.showToast({
+                title: '请重新进入!',
+                icon: 'error',
+                duration: 2000
+              })
+            }
+          })
+        }
+      })
+    }else{
+      console.log("app zhon")
+      this.setData({
+        openid: wx.getStorageSync('session').openid
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -304,10 +360,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const that = this;
-    that.setData({
-      openid: wx.getStorageSync('session').openid
-    })
 
   },
 

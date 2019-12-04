@@ -6,7 +6,7 @@ var QQMapWX = require('../libs/qqmap-wx-jssdk.js');
 
 // 实例化API核心类
 var qqmapsdk = new QQMapWX({
-  key: 'YGSBZ-QANC4-M2YUA-X2HI3-5AT6Q-JEBIJ' // 必填
+  key: 'KNQBZ-4G3KX-SMP4L-7DT3Q-G6FKS-3CF6G' // 必填
 });
 Page({
   data: {
@@ -40,11 +40,49 @@ Page({
     })
   },
   onShow: function () {
+    this.setData({
+      openid: wx.getStorageSync('session').openid,
+      token: wx.getStorageSync('token').access_token
+    })
+    console.log("ddd")
 
   },
+  // pushmessage:function(){
+  //   console.log("2222")
+  //   wx.requestSubscribeMessage({
+  //     tmplIds: ['tMpLNcVwvliMMNu7KvjHzHSfiTE5UpEQPOCAxkQEfFc'],
+  //     success(res) {
+  //       console.log(res)
+  //      },
+  //      fail(res){
+  //        console.log(res)
+  //      }
+
+  //   })
+
+  // },
+
+  //生成formId
+  // submit: function (e) {
+  //   console.log(e.detail.formId, "我是formID");
+  //   // wx.request({
+  //   //   url: app.globalData.domain + 'saveFormId',
+  //   //   method: 'POST',
+  //   //   header: {
+  //   //     "content-type": "application/x-www-form-urlencoded"
+  //   //   },
+  //   //   data: {
+  //   //     formId: e.detail.formId,
+  //   //     orgId: app.globalData.orgId,
+  //   //     userId: wx.getStorageSync("shareId")
+  //   //   },
+  //   //   success: function (res) {
+  //   //   }
+  //   // })
+  // },
+
   onLoad: function () {
     let that = this;
-    console.log(wx.getStorageSync('token'))
     /**
      * 实例化API核心类(详情见申请key)：http://lbs.qq.com/console/mykey.html
      */
@@ -66,7 +104,6 @@ Page({
         });
         that.getPoiList(res.longitude, res.latitude)
         that.getdriverlist(res.longitude, res.latitude)
-        console.log("index中load经纬度")
       }
     })
 
@@ -82,8 +119,6 @@ Page({
   },
   subdrive1: function (e) {
     const that = this;
-    console.log(that.data.token)
-    console.log('that.data.token')
     if(!that.data.token){
       wx.showToast({
         title: '请登录！',
@@ -116,9 +151,25 @@ Page({
           that.setData({
             btn1show: true
           })
+        if(res.data.code==200){   
+          wx.showToast({
+            title: '预约代驾成功！',
+            icon: 'success',
+            duration: 5000
+          })      
           wx.navigateTo({
             url: '/pages/order/index',
           })
+
+        } else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2500
+          })
+
+        }
         },
         fail() {
           that.setData({
@@ -127,7 +178,7 @@ Page({
           wx.showToast({
             title: '预约代驾失败',
             icon: 'error',
-            duration: 2000
+            duration: 3000
           })
         }
 
@@ -141,7 +192,7 @@ Page({
       wx.showToast({
         title: '手机号不正确',
         icon: 'error',
-        duration: 2000
+        duration: 3000
       })
       that.setData({
         btn2show: true
@@ -173,11 +224,23 @@ Page({
               header: wx.getStorageSync('header'),
               method: 'post',
               success(res) {
+                if(res.data.code==200){
                 wx.showToast({
                   title: '预约代叫成功',
                   icon: 'success',
-                  duration: 2000
-                })
+                  duration: 5000
+                  })
+                  wx.navigateTo({
+                    url: '/pages/order/index',
+                  })
+                }else{
+                  let mess = res.data.message
+                  wx.showToast({
+                    title: mess,
+                    icon: 'none',
+                    duration: 2500
+                  })
+                }
 
               },
               fail() {
@@ -190,15 +253,10 @@ Page({
               }
             })
           } else if(res.data.code === 422) {
-            console.log(res.data.code)
             wx.navigateTo({
               url: '/pages/registe/index',
             })
           } else if (res.data.code === 401) {
-            console.log(that.data.staraddr)
-            console.log(that.data.myLongitude)
-            console.log(that.data.myLatitude)
-            console.log(that.data.token)
             wx.navigateTo({
               url: '/pages/denglu/index',
             })
@@ -291,6 +349,13 @@ Page({
           
 
           }
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2500
+          })         
         }
       },
       fail(){}
@@ -307,7 +372,6 @@ Page({
           longitude: res.longitude,
           latitude: res.latitude
         })
-        console.log(res)
         that.getPoiList(res.longitude, res.latitude)
         that.getdriverlist(res.longitude, res.latitude)
 
@@ -333,7 +397,6 @@ Page({
       get_poi: 1,
       poi_options: 'policy=2;radius=3000;page_size=2;page_index=1',
       success: function (res) {
-        console.log("地址解析" + res)
         /**
          * 详细数据从这儿拿....
          */
@@ -342,7 +405,6 @@ Page({
         });
       },
       fail: function (res) {
-        console.log(res);
       },
       complete: function (res) {
 

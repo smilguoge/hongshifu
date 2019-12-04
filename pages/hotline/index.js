@@ -38,7 +38,6 @@ Page({
       header: wx.getStorageSync('header'),
       success(res){  
         if (res.data.code == 200 && res.data.data.list.length > 0){
-          console.log(res.data.data.list)
           if (that.data.reachbottom){
             that.setData({
               companyinf: res.data.data.list,

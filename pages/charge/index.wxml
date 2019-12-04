@@ -27,13 +27,18 @@
       <view  class="psty12">
         <view class="text7">等待时间：</view><view class="text6">{{item.waittime}}分钟免费，超过{{item.nextwaittime}}分钟{{item.addwaittime}}元 不满{{item.nextwaittime}}分钟按{{item.nextwaittime}}分钟计算</view>
       </view>
+      <view  class="psty12" wx:if="{{item.rangeover}}">
+        <view class="text7">远途费，超过</view><view class="text6">{{item.rangeover}}公里以后，每{{item.rangepercent}}公里（超过{{item.rangeover}}km收费）加收{{item.addrange}}元</view>
+      </view>
+      <view  class="psty12" wx:if="{{item.minprice}}">
+        <view class="text7">最低消费：</view><view class="text6">{{item.minprice}}元</view>
+      </view>
+
     </view>
   </block>
   <view class="psty11"><view class="psty11_1">超过6公里加收15%返程费，客服热线：0592-5555720</view></view>
   </view>
   <view class="content2" wx:if="{{!iscontentture}}">目前还没开通！</view>
-    <!-- <view class="psty10"><text class="text5">1.</text>代驾出区外  <text class="text5">2.</text>区外代驾到区内  <text class="text5">3.</text>区外代驾区外超过6公里，系统自动增收20％的返程费。</view> -->
-  <!-- <view class="psty7"><view class="psty71">微信叫代驾只需<text class="text4">{{18}}</text>元</view></view> -->
 </view>
 
 

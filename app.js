@@ -18,12 +18,15 @@ App({
              header: wx.getStorageSync('header'),
              success(res){
                let session = res.data.data;
+               console.log("app中openid")
+               console.log(res.data.data)
                wx.setStorageSync('session', session);//信息存储openid和session
              },
              fail(res) {
+               console.log(res)
                wx.showToast({
                  title: '请重新进入!',
-                icon: 'error',
+                 icon: 'error',
                  duration: 2000
                })
              }

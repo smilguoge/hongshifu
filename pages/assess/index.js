@@ -73,7 +73,25 @@ Page({
       method:'post',
       header: wx.getStorageSync('header'),
       success(res){
-        wx.navigateBack();
+        if(res.data.code==200){
+          wx.showToast({
+            title: '评价成功！',
+            icon: 'success',
+            duration: 3000
+          })
+
+          setTimeout(function () {
+            wx.navigateBack();
+          }, 3000)
+          
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 3000
+          })
+        }
       }
 
     })

@@ -50,13 +50,22 @@ Page({
       },
       method:'post',
       header: wx.getStorageSync('header'),
-      success(){
-        getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        wx.showToast({
-          title: '取消成功！',
-          icon: 'success',
-          duration: 2000
-        })
+      success(res){
+        if(res.data.code==200){
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          wx.showToast({
+            title: '取消成功！',
+            icon: 'success',
+            duration: 2000
+          })
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2000
+          })
+        }
 
       }
 
@@ -97,7 +106,16 @@ Page({
       url: wx.getStorageSync('config').item_url,
       data:{pid:'ORDER_EVALUATE' },
       success(res){
-        that.setData({ orderitems: res.data.data})
+        if(res.data.code==200){
+          that.setData({ orderitems: res.data.data })
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2000
+          })
+        }
       }
     })
     wx.request({
@@ -108,32 +126,31 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res){
-        console.log(res)
-        console.log(res.data.data.order_address.length > 12)
-        if (res.data.data.avatar_url){
-            that.setData({customerlogo: res.data.data.avatar_url})
-        }else{
-          that.setData({customerlogo: app.globalData.userInfo.avatarUrl})
-            }
-        if (res.data.data.status==0){
-          that.setData({ isorderstat: true })
-        }else{
-          that.setData({ isorderstat: false })
-        }
-        if (res.data.data.status == 60) {
-          that.setData({ assshow: true })
-        }
-        if (res.data.data.order_address.length > 12){
-             staradds=res.data.data.order_address.substring(0, 12) + '...'
-        }else{
-           staradds = res.data.data.order_address
-        }
-        if (res.data.data.order_destination_address.length > 12) {
-          endadds=res.data.data.order_destination_address.substring(0, 12) + '...'
-        }else{
-          endadds = res.data.data.order_destination_address
-        }      
-        that.setData({
+        if(res.data.code==200){
+          if (res.data.data.avatar_url) {
+            that.setData({ customerlogo: res.data.data.avatar_url })
+          } else {
+            that.setData({ customerlogo: app.globalData.userInfo.avatarUrl })
+          }
+          if (res.data.data.status == 0) {
+            that.setData({ isorderstat: true })
+          } else {
+            that.setData({ isorderstat: false })
+          }
+          if (res.data.data.status == 60) {
+            that.setData({ assshow: true })
+          }
+          if (res.data.data.order_address.length > 12) {
+            staradds = res.data.data.order_address.substring(0, 12) + '...'
+          } else {
+            staradds = res.data.data.order_address
+          }
+          if (res.data.data.order_destination_address.length > 12) {
+            endadds = res.data.data.order_destination_address.substring(0, 12) + '...'
+          } else {
+            endadds = res.data.data.order_destination_address
+          }
+          that.setData({
             orderinf: res.data.data,
             id: that.options.id,
             staaddr: staradds,
@@ -143,6 +160,15 @@ Page({
             drivtime: res.data.data.driving_minute,
             mileage: res.data.data.mileage,
           })
+
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2500
+          })
+        }
 
        
       }

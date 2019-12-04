@@ -56,21 +56,31 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res){
-        console.log(res.data.data)
-        const data = res.data.data
-        data.mileage = data.mileage.substring(0, data.mileage.indexOf('.')+2)
-        data.money = data.money.substring(0, data.money.indexOf('.'))
-        that.setData({
-          time: data.driving_minute,
-          distance: data.mileage,
-          staaddr: data.order_address,
-          endaddr: data.order_destination_address,
-          money: data.money,
-          [markla0]: data.order_lat,
-          [markln0]: data.order_lng,
-          [markla1]: data.destination_lat,
-          [markln1]: data.destination_lng,
-        })
+        if(res.data.code==200){
+          console.log(res.data.data)
+          const data = res.data.data
+          data.mileage = data.mileage.substring(0, data.mileage.indexOf('.') + 2)
+          data.money = data.money.substring(0, data.money.indexOf('.'))
+          that.setData({
+            time: data.driving_minute,
+            distance: data.mileage,
+            staaddr: data.order_address,
+            endaddr: data.order_destination_address,
+            money: data.money,
+            [markla0]: data.order_lat,
+            [markln0]: data.order_lng,
+            [markla1]: data.destination_lat,
+            [markln1]: data.destination_lng,
+          })
+
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2000
+          })
+        }
         
 
       }
@@ -83,21 +93,30 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res) {
-        let data = res.data.data.points;
-        let points=[];
-        let opp = 'polyline[' + 0 + '].points'
-        if (data.length>0){
-          data.forEach(r => {
-            let num = r.location.indexOf(',')
-            let ln = r.location.substring(0, num), la = r.location.substring(num + 1);
-            const laln = {
-              longitude: ln,
-              latitude: la
-            }
-            points.push(laln)
-          })
-          that.setData({
-            [opp]: points
+        if(res.data.code==200){
+          let data = res.data.data.points;
+          let points = [];
+          let opp = 'polyline[' + 0 + '].points'
+          if (data.length > 0) {
+            data.forEach(r => {
+              let num = r.location.indexOf(',')
+              let ln = r.location.substring(0, num), la = r.location.substring(num + 1);
+              const laln = {
+                longitude: ln,
+                latitude: la
+              }
+              points.push(laln)
+            })
+            that.setData({
+              [opp]: points
+            })
+          }
+        }else{
+          let mess = res.data.message
+          wx.showToast({
+            title: mess,
+            icon: 'none',
+            duration: 2000
           })
         }
         

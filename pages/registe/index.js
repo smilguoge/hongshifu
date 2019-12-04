@@ -44,14 +44,22 @@ Page({
             delta: 1
           })
         }else{
+          let mess = res.data.message
           wx.showToast({
-            title: '失败重新申请！',
-            icon: 'error',
-            duration: 1800
+            title: mess,
+            icon: 'none',
+            duration: 2000
           })
 
         }
 
+      },
+      fail(){
+        wx.showToast({
+          title: '重新申请！',
+          icon: 'error',
+          duration: 1800
+        })
       }
 
     })

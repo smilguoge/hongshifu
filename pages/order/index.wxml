@@ -1,6 +1,7 @@
 <!--pages/order2/index.wxml-->
 <view class="page2">
-<view class="order-inf" wx:for="{{orderinfs}}" wx:key="index" data-indx="{{index}}">
+ <view wx:if="{{isshow}}">
+ <view class="order-inf" wx:for="{{orderinfs}}" wx:key="index" data-indx="{{index}}">
 <view bindtap="goorderinf" data-id="{{item.id}}">
   <view class="pcont1">
   <text class="tex6">我的代驾</text>
@@ -19,4 +20,6 @@
   <text class="btn1" hidden="{{!(item.status==60)}}" bindtap="goassess" data-id="{{item.id}}">{{string1}}</text>
   </view>
 </view>
+ </view>
+ <view  wx:if="{{!isshow}}" class="pcont5">还没有下单！</view>
 </view>

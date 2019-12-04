@@ -15,11 +15,13 @@
     width: 35rpx;
     height: 35rpx;
     margin-right: 20rpx;
+      padding-bottom: 25rpx;
   }
   .icon2img{
     width: 50rpx;
     height: 50rpx;
     margin-right: 20rpx;  
+      padding-bottom: 25rpx;
   }
   .de-bottom{
     position: fixed;
@@ -38,7 +40,6 @@
 .de-cell{
   margin: 35rpx 100rpx;
   border-bottom: 1px solid #dcdcdc;
-  padding-bottom: 25rpx;
   padding-left: 15rpx;
   padding-right: 15rpx;
   text-align: left;
@@ -49,7 +50,7 @@
   display: flex;
   align-items: center;
 }
-.de-cell2 input{padding-right: 15rpx;}
+.de-cell2 input{padding-right: 15rpx; padding-bottom: 25rpx;}
 .de-btn1::after{border:none;}
 .de-btn1::before{border:none;}
 .de-btn1{
@@ -62,6 +63,7 @@
   line-height: 1.5;
   padding-right: 0;
   padding-left: 20rpx;
+   padding-bottom: 25rpx;
 }
 input{
   font-size: 30rpx;
@@ -132,4 +134,7 @@ background-color: rgba(0, 0, 0, .4)
   text-align: center;
   margin-bottom: -25rpx;
   margin-top: -5rpx;
+}
+.weui-input{
+    padding-bottom: 25rpx;
 }

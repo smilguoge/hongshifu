@@ -43,6 +43,10 @@
   <text>优惠金额</text>
   <text class="col1">{{orderinf.coupon_fee}}元</text>
 </view>
+<view class="pcont2" wx:if="{{orderinf.markup>1}}">
+  <text>加价倍数</text>
+  <text class="col1">{{orderinf.markup}}倍</text>
+</view>
 </view>
 <view class="order-pa4">
 <view>总计：<text class="font1">{{money}}</text>({{orderinf.status_name}})</view>

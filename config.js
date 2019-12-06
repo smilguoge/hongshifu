@@ -1,4 +1,4 @@
-var host ="http://api.bzffs.cc"
+var host ="https://hsf-api.threeape.com"
 var config={
   host,
   login_url: host +'/api/auth/login',
@@ -29,5 +29,5 @@ var config={
   couponde_url: host + '/api/activity/coupon/detail',
   couponob_url: host + '/api/activity/coupon/obtain'
 }
-var header = { 'x-service-id': '1' }
+var header = { 'x-service-id': '2' }
 module.exports = {config, header}

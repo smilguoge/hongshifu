@@ -247,7 +247,7 @@ Page({
       wx.showToast({
         title: '获取验证码',
         icon: 'loading',
-        duration: 6000
+        duration: 3000
       })
        wx.request({
           url: wx.getStorageSync('config').send_url,
@@ -296,13 +296,10 @@ Page({
             header: wx.getStorageSync('header'),
             success(res) {
               let session = res.data.data;
-              console.log("登录页的openid")
-              console.log(session)
               wx.setStorageSync('session', session);//信息存储openid和session
               that.setData({
                 openid: session.openid
               })
-              console.log("页面设置openid")
             },
             fail(res) {
               console.log(res)
@@ -316,7 +313,6 @@ Page({
         }
       })
     }else{
-      console.log("app zhon")
       this.setData({
         openid: wx.getStorageSync('session').openid
       })

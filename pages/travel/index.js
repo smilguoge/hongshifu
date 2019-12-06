@@ -56,6 +56,7 @@ Page({
       },
       header: wx.getStorageSync('header'),
       success(res){
+        wx.hideToast()
         if(res.data.code==200){
           console.log(res.data.data)
           const data = res.data.data
@@ -132,7 +133,11 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.showToast({
+      title: '加载中',
+      icon: 'success',
+      duration: 9000
+    })
   },
 
   /**

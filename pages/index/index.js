@@ -151,15 +151,19 @@ Page({
           that.setData({
             btn1show: true
           })
+          console.log(that.data.token)
+          console.log(res.data.code)
         if(res.data.code==200){   
           wx.showToast({
             title: '预约代驾成功！',
             icon: 'success',
-            duration: 5000
+            duration: 2000
           })      
-          wx.navigateTo({
-            url: '/pages/order/index',
-          })
+          setTimeout(function () {
+            wx.navigateTo({
+              url: '/pages/order/index',
+            })
+          }, 2000)
 
         } else{
           let mess = res.data.message
@@ -212,7 +216,9 @@ Page({
           that.setData({
             btn2show: true
           })
-          if (res.data.code === 200){
+          console.log("查看是否注册")
+          console.log(res)
+          if (res.data.code === 200){ 
             wx.request({
               url: wx.getStorageSync('config').calling_url,
               data: {
@@ -224,17 +230,21 @@ Page({
               header: wx.getStorageSync('header'),
               method: 'post',
               success(res) {
+                console.log(res)
                 if(res.data.code==200){
                 wx.showToast({
                   title: '预约代叫成功',
                   icon: 'success',
-                  duration: 5000
+                  duration: 2000
                   })
-                  wx.navigateTo({
-                    url: '/pages/order/index',
-                  })
+                  setTimeout(function () {
+                    wx.navigateTo({
+                      url: '/pages/order/index',
+                    })
+                  }, 2000)
                 }else{
                   let mess = res.data.message
+                  console.log("22")
                   wx.showToast({
                     title: mess,
                     icon: 'none',

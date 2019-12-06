@@ -10,7 +10,8 @@ Page({
     limit: 8,
     page: 1,
     isshow: true,
-    orderinfs:[]
+    orderinfs:[],
+    shownum:0
   },
   goorderinf: function (e) {
     wx.navigateTo({
@@ -144,7 +145,7 @@ Page({
     wx.showToast({
       title: '加载中',
       icon: 'loading',
-      duration: 9000000
+      duration: 900000
     })
 
   
@@ -154,11 +155,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      limit: 8,
-      page: 1
-    })
-    this.getorderlist()
+    console.log(this.data.shownum)
+    if(this.data.shownum==0){
+      this.setData({
+        shownum:1
+      })
+
+    }else{
+      this.setData({
+        limit: 8,
+        page: 1
+      })
+      this.getorderlist()
+
+    }
 
   },
 
@@ -207,7 +217,7 @@ Page({
       wx.showToast({
         title: '加载中',
         icon: 'loading',
-        duration: 9000000
+        duration: 900000
       })
     }
   },

@@ -91,6 +91,9 @@ Page({
             icon: 'none',
             duration: 3000
           })
+          setTimeout(function () {
+            wx.navigateBack();
+          }, 3000)
         }
       }
 
